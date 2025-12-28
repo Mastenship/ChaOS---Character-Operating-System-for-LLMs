@@ -1,0 +1,119 @@
+=== SECTION: BELIEF_INTEGRATION_PROCESSING ===
+
+[KEEP: Purpose & Role]
+This COT processes how beliefs filter perception, constrain decisions, and generate meaning from experiences. It ensures actions align with or consciously violate belief systems, and prefers temporary dissonance overlays over baseline belief rewrites.
+
+[KEEP: Relationship to Other Modules]
+Informs: DECISION_SYNTHESIS (moral constraints), MEMORY (meaning attribution cues), STRESS_CASCADE_RESOLUTION (existential pressure).
+Is Informed By: BELIEF_SYSTEMS, MEMORY, TEMPORARY_MODIFIERS, narrative input.
+
+=== SECTION_BREAK ===
+
+=== SECTION: WRITE_POLICY_OVERRIDE ===
+
+[[LLM_INSTRUCTION]]: This COT is forbidden from directly modifying any persistent module file, including BELIEF_SYSTEMS.
+
+[[LLM_INSTRUCTION]]: This COT MUST express intended persistent-state changes ONLY as proposals in:
+- [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+
+[[LLM_INSTRUCTION]]: This COT MAY write behavioral impulses to:
+- [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY]
+
+Only STATE_GOVERNANCE_AND_COMMIT may commit proposals.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TEMPORARY_MODIFIERS_INTEGRATION ===
+
+[[LLM_INSTRUCTION]]: Read TEMPORARY_MODIFIERS for ACTIVE modifiers affecting:
+- BELIEF_MODIFIER (dissonance pressure)
+- AROUSAL or cognitive load (which affects meaning-making)
+Use modifiers as overlays.
+
+Preference:
+- Use TEMPORARY_MODIFIERS for short-term dissonance and worldview defense weighting.
+- Reserve BELIEF_SYSTEMS baseline changes for watershed events or repeated evidence.
+
+=== SECTION_BREAK ===
+
+=== SECTION: BELIEF_FILTERING ===
+
+[[LLM_INSTRUCTION]]: Identify activated beliefs and whether the event causes dissonance.
+
+Outputs:
+- Moral constraint pressure impulse
+- Worldview defense pressure impulse
+- Meaning-making framing cues for potential MEMORY linkage
+
+=== SECTION_BREAK ===
+
+=== SECTION: BELIEF_CHANGE_CONTRACT ===
+
+[[LLM_INSTRUCTION]]: Apply the stability rule: beliefs are generally stable.
+
+Short_Term_Effects:
+- Propose ADD_MODIFIER:
+  TARGET_MODULE: TEMPORARY_MODIFIERS
+  TARGET_FIELD: [BELIEF_SYSTEMS]
+  OPERATION_TYPE: ADD_MODIFIER
+  PROPOSED_VALUE:
+    MODIFIER_TYPE: BELIEF_MODIFIER
+    MECHANISM_TAG: DISSONANCE_PRESSURE
+    TARGET_FIELD: [BELIEF_SYSTEMS]
+    TARGET_ID: NONE
+    EFFECT_EXPRESSION: INCREASE_DIVERGENCE_SENSITIVITY_WORLDVIEW_DEFENSE
+    MAGNITUDE: +15_PERCENT
+    STACKING_RULE: REPLACE
+    DURATION_TYPE: SCENE
+    DURATION_VALUE: THIS_SCENE
+    EXPIRY_CONDITION: SCENE_TRANSITION
+    JUSTIFICATION: DISSONANCE_CUES_PRESENT
+
+Long_Term_Effects (rare):
+- Only propose baseline BELIEF_SYSTEMS changes if:
+  - repeated evidence over time OR
+  - explicit watershed trauma event exists
+and justification must explicitly cite the evidence pattern.
+
+=== SECTION_BREAK ===
+
+=== SECTION: BEHAVIORAL_IMPULSE_GENERATION ===
+
+[[LLM_INSTRUCTION]]: Generate belief-driven impulses for DECISION_SYNTHESIS.
+
+Impulse_Types:
+- MORAL_CONSTRAINT
+- WORLDVIEW_DEFENSE
+- MEANING_MAKING
+- JUSTICE_SEEKING
+
+Impulse_Output_Format:
+IMPULSE_SOURCE: BELIEF_INTEGRATION_PROCESSING
+IMPULSE_TYPE: [MORAL_CONSTRAINT | WORLDVIEW_DEFENSE | MEANING_MAKING | JUSTICE_SEEKING]
+IMPULSE_STRENGTH: [0-100]
+TARGET_ID: [Optional]
+JUSTIFICATION: [Brief cue-based reason]
+JUSTIFICATION_CATEGORY: DIRECT_APPLICATION
+
+=== SECTION_BREAK ===
+
+=== SECTION: SYSTEM_UPDATE_DIRECTIVES ===
+
+[[LLM_INSTRUCTION]]: After completing belief integration:
+- Write proposals only into [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+- Write impulses only into [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY]
+- Append a TRACE_ENTRY into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+
+TRACE_ENTRY_MINIMUM_FIELDS:
+COT_NAME: BELIEF_INTEGRATION_PROCESSING
+KEY_OUTPUTS:
+- [Activated belief themes + dissonance yes/no]
+GENERATED_IMPULSES:
+- [List of impulse types]
+PROPOSED_UPDATES_COUNT: [Number]
+NOTES:
+- [Short notes]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

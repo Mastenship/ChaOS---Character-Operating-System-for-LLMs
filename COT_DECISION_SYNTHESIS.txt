@@ -1,0 +1,148 @@
+=== SECTION: DECISION_SYNTHESIS ===
+
+[KEEP: Purpose & Role]
+This COT performs final arbitration when multiple behavioral impulses compete. It selects a coherent action for the current cycle using decision theory and constraint logic. It outputs:
+- a single structured SELECTED_ACTION record into the scratchpad
+- optional narrative-facing action description
+- trace output for debugging
+
+[KEEP: Relationship to Other Modules]
+Informs: Final behavioral output for the narrative cycle.
+Is Informed By: [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY], CURRENT_DPF context, GOALS_MOTIVATIONS value hierarchy (conceptually), BELIEF_SYSTEMS moral constraints (conceptually), TEMPORARY_MODIFIERS (impulse weighting overlays).
+
+=== SECTION_BREAK ===
+
+=== SECTION: WRITE_POLICY_OVERRIDE ===
+
+[[LLM_INSTRUCTION]]: This COT is forbidden from directly modifying any persistent module file, including TEMPORARY_MODIFIERS. It is an arbiter, not a committer.
+
+[[LLM_INSTRUCTION]]: This COT may write only to the scratchpad:
+- [COGNITIVE_SCRATCHPAD][SYNTHESIS_WORKSPACE]
+- [COGNITIVE_SCRATCHPAD][TEMPORARY_STATE_FLAGS]
+- [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+- It may also append a structured decision record in this COT output section (see SELECTED_ACTION_OUTPUT below)
+
+[[LLM_INSTRUCTION]]: If this COT proposes updates at all, they must be extremely rare and must still go through [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]. Default is no proposals.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TEMPORARY_MODIFIERS_INTEGRATION ===
+
+[[LLM_INSTRUCTION]]: Before arbitration, read TEMPORARY_MODIFIERS for ACTIVE modifiers that affect:
+- impulse weighting
+- perceived threat weighting
+- cognitive load and decision speed
+- communication constraints (if relevant to feasible actions)
+
+Apply them as overlays. Do not treat modifiers as baseline rewrites.
+
+=== SECTION_BREAK ===
+
+=== SECTION: SCIENTIFIC_MODELS ===
+
+[[LLM_INSTRUCTION]]: Apply these decision-making frameworks.
+
+SCIENTIFIC_MODELS:
+- DUAL_PROCESS_THEORY
+- SOMATIC_MARKER_HYPOTHESIS
+- SATISFICING_VS_MAXIMIZING
+- TEMPORAL_DISCOUNTING
+- WINNER_TAKE_ALL_DYNAMICS
+- HIERARCHICAL_CONTROL_THEORY
+
+=== SECTION_BREAK ===
+
+=== SECTION: IMPULSE_COLLECTION_AND_HYGIENE ===
+
+[[LLM_INSTRUCTION]]: Read all impulses from [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY].
+
+Normalization_Rule:
+- Normalize impulse strengths to 0-100 after considering any modifier overlays that explicitly affect impulse weighting.
+
+Capping_Rule:
+- Keep top N impulses (default N = 8) for competition.
+- Mark:
+  - [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY][IMPULSE_HYGIENE][IMPULSE_NORMALIZED] = TRUE
+  - [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY][IMPULSE_HYGIENE][IMPULSE_CAP_APPLIED] = TRUE if capping happened
+
+Deferred_Impulses:
+- Do not delete deferred impulses; simply treat them as inactive for this cycle.
+
+=== SECTION_BREAK ===
+
+=== SECTION: DPF_CONTEXTUAL_WEIGHTING ===
+
+[[LLM_INSTRUCTION]]: Weight impulses by coherence with CURRENT_DPF.
+
+Guidance:
+- If CURRENT_DPF.CORE_ASSUMPTION implies threat, amplify defensive impulses.
+- If CURRENT_DPF.PACE is METHODICAL, favor planning or low-risk actions.
+- If CURRENT_DPF.SOCIAL_STANCE is SUSPICIOUS, reduce trust-based social impulses.
+
+Do not rewrite DPF here. Only weight decisions.
+
+=== SECTION_BREAK ===
+
+=== SECTION: DECISION_ARBITRATION_LOGIC ===
+
+[[LLM_INSTRUCTION]]: Select the winning impulse and record outcome.
+
+STAGE_0_SAFETY_VETO:
+- Apply moral or consent constraints using BELIEF_SYSTEMS conceptually.
+- If an impulse is vetoed:
+  - Mark it vetoed internally
+  - Choose next candidate
+
+STAGE_1_FEASIBILITY_FILTER:
+- Remove impossible actions based on narrative constraints and environment.
+- If all are impossible:
+  - Choose a default: FREEZE or WITHDRAW or SEEK_INFORMATION depending on context
+
+STAGE_2_COMPETITION:
+- Winner is highest weighted impulse.
+
+STAGE_3_INTERNAL_CONFLICT_FLAG:
+- If two top impulses are close (within 10 points) and represent opposing strategies:
+  - Set [COGNITIVE_SCRATCHPAD][TEMPORARY_STATE_FLAGS][CONFLICT_DETECTED] = TRUE
+  - Lower confidence score
+
+=== SECTION_BREAK ===
+
+=== SECTION: SELECTED_ACTION_OUTPUT ===
+
+[[LLM_INSTRUCTION]]: Write exactly one structured action record to the scratchpad each cycle.
+
+SELECTED_ACTION:
+ACTION_ID: [Optional, e.g., ACT_20251227_01, else NONE]
+ACTION_SOURCE_IMPULSE: [The winning IMPULSE_TYPE]
+ACTION_TYPE: [Machine-stable high-level action, e.g., ATTACK, ESCAPE, HIDE, NEGOTIATE, INVESTIGATE, PLAN, REST, USE_SKILL, SEEK_SUPPORT]
+TARGET_ID: [Optional ENT_XX, SKL_XX, location token, NONE]
+CONFIDENCE: [0-100]
+RATIONALE: [1-2 lines referencing strongest cues and why winner beat alternatives]
+CONFLICT_FLAG: [TRUE | FALSE]
+
+Optional_NARRATIVE_ACTION_DESCRIPTION:
+- [One concise sentence describing what the character does]
+
+=== SECTION_BREAK ===
+
+=== SECTION: SYSTEM_UPDATE_DIRECTIVES ===
+
+[[LLM_INSTRUCTION]]: After completing decision synthesis:
+- Do not directly commit state.
+- Append a TRACE_ENTRY into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE].
+- If conflict detected, set TEMPORARY_STATE_FLAGS accordingly.
+
+TRACE_ENTRY_MINIMUM_FIELDS:
+COT_NAME: DECISION_SYNTHESIS
+KEY_OUTPUTS:
+- [Selected action type and confidence]
+GENERATED_IMPULSES:
+- [NONE]
+PROPOSED_UPDATES_COUNT: 0
+NOTES:
+- [Any vetoes applied, feasibility filters used]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

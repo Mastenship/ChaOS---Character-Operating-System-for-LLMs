@@ -1,0 +1,73 @@
+=== SECTION: MEMORY ===
+
+[KEEP: Purpose & Role]
+To create a structured, time-stamped record of a salient event that caused a significant change in the character's state. It links a narrative moment to the mechanical templates, allowing the past to influence the present.
+
+[KEEP: Relationship to Other Modules]
+Informs: RELATIONAL (updates cognitive schema), SKILLS (updates acquisition context), BODY (context for chronic conditions), and the system's behavioral model.
+Is Informed By: All other modules, which provide trigger conditions for its creation.
+
+=== SECTION_BREAK ===
+
+=== SECTION: MEMORY_REGISTRY ===
+
+[[LLM_INSTRUCTION]]: List all known memory IDs. Each listed ID must have a corresponding record block in MEMORY_RECORDS. If no memories exist yet, list [NONE]. Do not invent IDs.
+
+MEMORY_ID:
+- [NONE]
+
+=== SECTION_BREAK ===
+
+=== SECTION: MEMORY_RECORDS ===
+
+[[LLM_INSTRUCTION]]: Each memory must have one record block keyed by its MEMORY_ID. The bracket token must match the ID exactly (e.g., [MEM_42_01]). Do not create record blocks unless a memory exists.
+
+[MEM_XX]
+MEMORY_ID: [MEM_XX]
+
+MEMORY_METADATA:
+TIMESTAMP: [e.g., CHARACTER_AGE_17 | DAY_3_OF_CAMPAIGN | AFTER_HEIST_EVENT | FREEFORM_DESCRIPTION]
+SALIENCE: [0-100]
+EMOTIONAL_VALENCE: [HOSTILE | COLD | NEUTRAL | WARM | DEVOTED]
+
+NARRATIVE_CONTENT:
+CORE_EVENT_SUMMARY: [One sentence factual summary.]
+SENSORY_IMPRINT: [Brief sensory details.]
+INTERNAL_MONOLOGUE_EXCERPT: [Brief thought quote.]
+
+SYSTEM_LINKAGE:
+
+[[LLM_INSTRUCTION]]: Use canonical bracket paths for SPECIFIC_FIELD_CHANGED. This is the API address of the dial that was affected or referenced.
+
+PRIMARY_TEMPLATE_AFFECTED: [RELATIONAL | SKILLS | BODY | MMPI | ALTERATIONS | DOMINANT_PREDICTIVE_FRAME | GOALS_MOTIVATIONS | BELIEF_SYSTEMS]
+SPECIFIC_FIELD_CHANGED: [Canonical bracket path, e.g., [RELATIONAL][ENT_01][AFFECTIVE_VALENCE]]
+
+ASSOCIATED_ENTITY_ID: [Optional ENT_XX]
+ASSOCIATED_SKILL_ID: [Optional SKL_XX]
+ASSOCIATED_ALTERATION_ID: [Optional ALT_XX]
+ASSOCIATED_PREDICTION_ID: [Optional PRD_XX]
+
+=== SECTION_BREAK ===
+
+=== SECTION: MEMORY_FORMATION_AND_UPDATE_RULES ===
+
+[[LLM_INSTRUCTION]]: MEMORY is primarily written via proposals from MEMORY_FORMATION_CRITERIA and committed by STATE_GOVERNANCE_AND_COMMIT.
+
+Creation_Requirements:
+- New memory proposals must use canonical paths:
+  - [MEMORY][MEM_XX][MEMORY_ID]
+  - [MEMORY][MEM_XX][MEMORY_METADATA]
+  - [MEMORY][MEM_XX][NARRATIVE_CONTENT]
+  - [MEMORY][MEM_XX][SYSTEM_LINKAGE]
+- New memory proposals must include MECHANISM_TAG MEMORY_FORMATION.
+- Per-cycle memory creation limit is enforced by STATE_GOVERNANCE_AND_COMMIT.
+
+Retroactive_Update_Requirements:
+- If new events recontextualize an old memory, propose updates to specific subfields only.
+Examples:
+- Target_Field: [MEMORY][MEM_12_01][MEMORY_METADATA][SALIENCE]
+- Target_Field: [MEMORY][MEM_12_01][NARRATIVE_CONTENT][CORE_EVENT_SUMMARY]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

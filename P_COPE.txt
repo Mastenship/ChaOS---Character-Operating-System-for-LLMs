@@ -1,0 +1,26 @@
+=== SECTION: COPE_BEHAVIORS ===
+
+[KEEP: Purpose & Role] This module defines the in-game behavioral and mechanical effects of the coping mechanisms listed in the COPE template. It provides the LLM with concrete consequences for a character's chosen stress response.
+
+[KEEP: Relationship to Other Modules]
+
+Informs: Brain-Body Link logic (provides the specific state changes triggered by coping).
+Is Informed By: COPE (which mechanisms are active), BACKGROUND (what resources are available).
+=== SECTION_BREAK ===
+
+=== SECTION: BEHAVIORAL_DEFINITIONS ===
+
+[Behavioral Definitions]
+Active Coping Behavioral Effect: The character takes direct, observable action to address the source of stress. This may involve confronting a person, fixing a machine, or physically removing an obstacle. System Effect: May immediately lower stress if the action is successful. Can trigger a SKILL use. If the action fails, stress may increase.
+
+Planning Behavioral Effect: The character withdraws to strategize. They may be seen studying maps, consulting data, or quietly thinking. They are not taking direct action yet. System Effect: Delays the stress response. Does not immediately change BODY states, but may prevent a future failure if the plan is good. Can be interrupted.
+
+Denial Behavioral Effect: The character actively refuses to acknowledge the stressor or its severity. They may dismiss concerns, change the subject, or insist everything is fine. System Effect: The stress response is delayed but not prevented. Cortisol will still rise, but the character is unaware of it. When the denial breaks, the stress response can be more severe (e.g., transitioning directly to [Spike] or [Chronic]).
+
+Substance Use Behavioral Effect: The character seeks out and uses alcohol, drugs, or other intoxicants to numb the emotional impact of the stressor. System Effect: Temporarily lowers the perception of stress but causes negative system effects. Set BODY Neurochemical_Balance to [Dysregulated]. Set Metabolic_Health to [Strained] with repeated use. High risk of creating a negative MEMORY.
+
+Venting Behavioral Effect: The character seeks to express their emotions about the stressor, often to another person. This can be complaining, crying, shouting, or intense storytelling. System Effect: Can lower the character's own emotional valence towards the stressor (making it more manageable), but may negatively affect RELATIONAL states with the listener if they are unsympathetic.
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

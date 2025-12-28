@@ -1,0 +1,220 @@
+=== SECTION: STATE_GOVERNANCE_AND_COMMIT ===
+
+[KEEP: Purpose & Role]
+This module is the single writer to persistent modules and TEMPORARY_MODIFIERS. It reconciles proposals from COTs, enforces canonical addressing, step limits, invariants, caps, and deterministic conflict policy, then commits a single stable update set once per processing cycle.
+
+[KEEP: Relationship to Other Modules]
+Informs: All persistent modules and TEMPORARY_MODIFIERS.
+Is Informed By: COGNITIVE_SCRATCHPAD, UPDATE_CASCADE_REGISTRY, STATE_GOVERNANCE_OVERLAY, CANONICAL_TOKEN_DICTIONARY, TEMPORARY_MODIFIERS.
+
+=== SECTION_BREAK ===
+
+=== SECTION: REQUIRED_INPUTS ===
+
+[[LLM_INSTRUCTION]]: Confirm required scratchpad sections exist. If missing, suppress affected proposals and record audit notes.
+
+Required_Scratchpad_Sections:
+- [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+- [COGNITIVE_SCRATCHPAD][STATE_COMMIT_AUDIT]
+- [COGNITIVE_SCRATCHPAD][TEMPORARY_STATE_FLAGS]
+- [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+- [COGNITIVE_SCRATCHPAD][CYCLE_METADATA]
+
+Optional_Scratchpad_Sections:
+- [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY]
+- [COGNITIVE_SCRATCHPAD][CURRENT_DPF]
+- [COGNITIVE_SCRATCHPAD][SELECTED_ACTION]
+
+=== SECTION_BREAK ===
+
+=== SECTION: PROPOSAL_ID_RULES ===
+
+[[LLM_INSTRUCTION]]: Proposal_ID must be unique within a cycle.
+
+Uniqueness_Rule:
+- If duplicate PROPOSAL_ID values exist, suppress later duplicates and audit.
+
+=== SECTION_BREAK ===
+
+=== SECTION: MINIMUM_PROPOSAL_SCHEMA ===
+
+[[LLM_INSTRUCTION]]: A proposal must include all required fields or it is suppressed.
+
+Required_Fields:
+- PROPOSAL_ID
+- SOURCE_COT
+- TARGET_MODULE
+- TARGET_FIELD
+- OPERATION_TYPE
+- PROPOSED_VALUE
+- STRENGTH
+- MECHANISM_TAG
+- JUSTIFICATION
+
+=== SECTION_BREAK ===
+
+=== SECTION: CANONICALIZATION_AND_ALIAS_TRANSLATION ===
+
+[[LLM_INSTRUCTION]]: Enforce canonical bracket addressing and translate known aliases using S_CANONICAL_TOKEN_DICTIONARY.
+
+Rules:
+- If TARGET_FIELD is not canonical:
+  - Attempt alias translation using dictionary rules.
+  - If translation fails, suppress with reason NON_CANONICAL_TARGET_FIELD.
+- Enforce Alias_Translation_Limit_Per_Cycle.
+
+=== SECTION_BREAK ===
+
+=== SECTION: MODIFIER_OPERATION_ROUTING ===
+
+[[LLM_INSTRUCTION]]: Route modifier operations into TEMPORARY_MODIFIERS, not baseline modules.
+
+Routing_Rule:
+- If OPERATION_TYPE is ADD_MODIFIER or REMOVE_MODIFIER or CAP targeting modifiers:
+  - Commit target is TEMPORARY_MODIFIERS regardless of proposal TARGET_MODULE.
+
+Modifier_Payload_Gate (ADD_MODIFIER):
+- PROPOSED_VALUE must include at minimum:
+  - MODIFIER_TYPE
+  - MECHANISM_TAG
+  - TARGET_FIELD
+  - EFFECT_EXPRESSION
+  - MAGNITUDE
+  - DURATION_TYPE
+If missing:
+- Suppress with reason INVALID_MODIFIER_PAYLOAD.
+
+Remove_Modifier_Gate (REMOVE_MODIFIER):
+- PROPOSED_VALUE must include either:
+  - MODIFIER_ID
+  OR
+  - MODIFIER_TYPE + MECHANISM_TAG + TARGET_FIELD + TARGET_ID
+If missing:
+- Suppress with reason INVALID_REMOVE_MODIFIER_PAYLOAD.
+
+=== SECTION_BREAK ===
+
+=== SECTION: HARD_STATE_OPERATION_ENFORCEMENT ===
+
+[[LLM_INSTRUCTION]]: Prevent baseline drift.
+
+Rule_SET_TO_TRANSITION_DOWNGRADE:
+- If TARGET_FIELD is HARD_STATE and OPERATION_TYPE is SET:
+  - Downgrade to TRANSITION if a valid transition exists.
+  - Else suppress INVALID_HARD_STATE_SET.
+
+=== SECTION_BREAK ===
+
+=== SECTION: CONFLICT_RESOLUTION_POLICY ===
+
+[[LLM_INSTRUCTION]]: Resolve conflicts deterministically.
+
+PRECEDENCE_ORDER:
+1) VETO
+2) TRANSITION
+3) SET
+4) ADD_MODIFIER
+5) REMOVE_MODIFIER
+6) CAP
+
+TIE_BREAKERS:
+- Higher STRENGTH wins.
+- If tie: earlier COT priority wins (UPDATE_CASCADE_REGISTRY).
+- If tie: choose more conservative change.
+
+=== SECTION_BREAK ===
+
+=== SECTION: DOUBLE_COUNTING_PREVENTION ===
+
+[[LLM_INSTRUCTION]]: Prevent repeated escalation in the same causal channel during one cycle.
+
+Axis_Escalation_Limits:
+- HPA_AXIS: only one winning HARD_STATE TRANSITION affecting [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL] per cycle.
+- SYMPATHETIC: only one winning HARD_STATE TRANSITION affecting [BODY][BIOCHEMICAL_STATE_MARKERS][ADRENALINE] per cycle.
+
+If violated:
+- Downgrade weaker endocrine escalations to ADD_MODIFIER if valid payload exists.
+- Else suppress.
+
+=== SECTION_BREAK ===
+
+=== SECTION: INVARIANTS ===
+
+[[LLM_INSTRUCTION]]: Enforce invariants after reconciliation and before commit.
+
+Endocrine_Invariants:
+- [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL] cannot transition to BASELINE without explicit rest/recovery cue.
+- [BODY][BIOCHEMICAL_STATE_MARKERS][ADRENALINE] cannot transition to BASELINE without explicit threat-resolution or rest cue.
+
+Memory_Invariants:
+- New MEMORY entries require MECHANISM_TAG MEMORY_FORMATION.
+- Enforce per-cycle creation limit (2).
+
+DPF_Invariants:
+- Only one full DPF recalculation may be committed per cycle.
+- Additional contradictions set [COGNITIVE_SCRATCHPAD][TEMPORARY_STATE_FLAGS][DPF_RECALC_QUEUED] = TRUE.
+
+=== SECTION_BREAK ===
+
+=== SECTION: AUTO_REGISTRY_INSERTION ===
+
+[[LLM_INSTRUCTION]]: API convenience feature. When committing a new record block, automatically ensure its ID is present in the module registry list. This prevents missed registry entries and removes the need for COTs to propose registry updates.
+
+Rule_Detection:
+- If a committed proposal creates or sets:
+  - [MEMORY][MEM_XX][MEMORY_ID]
+    then ensure MEM_XX exists in MEMORY.MEMORY_REGISTRY list
+- If a committed proposal creates or sets:
+  - [ALTERATIONS][ALT_XX][ALTERATION_ID]
+    then ensure ALT_XX exists in ALTERATIONS.ALTERATION_REGISTRY list
+- If a committed proposal creates or sets:
+  - [RELATIONAL][ENT_XX][ENTITY_ID]
+    then ensure ENT_XX exists in RELATIONAL.RELATIONAL_REGISTRY list
+- If a committed proposal creates or sets:
+  - [SKILLS][SKL_XX][SKILL_NAME] OR [SKILLS][SKL_XX][SKILL_ID] if you later add it
+    then ensure SKL_XX exists in SKILLS.SKILL_REGISTRY list if present
+
+Insertion_Constraints:
+- Do not duplicate entries.
+- Preserve existing order; append new IDs at end if order is unknown.
+
+Audit_Requirement:
+- Record an audit note when auto-insertion occurs:
+  - FINAL_ACTION: COMMITTED
+  - NOTES: AUTO_REGISTRY_INSERTION_APPLIED
+
+=== SECTION_BREAK ===
+
+=== SECTION: COMMIT_OUTPUT_REQUIREMENT ===
+
+[[LLM_INSTRUCTION]]: Populate [COGNITIVE_SCRATCHPAD][STATE_COMMIT_AUDIT] such that every proposal is listed exactly once as COMMITTED, SUPPRESSED, or DOWNGRADED.
+
+Audit_Fields_Per_Entry:
+- PROPOSAL_ID
+- TARGET_FIELD
+- FINAL_ACTION
+- NOTES
+
+=== SECTION_BREAK ===
+
+=== SECTION: CASCADE_TRACE_OUTPUT ===
+
+[[LLM_INSTRUCTION]]: Append a commit summary entry to [COGNITIVE_SCRATCHPAD][CASCADE_TRACE].
+
+STATE_GOVERNANCE_AND_COMMIT_TRACE_ENTRY:
+COT_NAME: STATE_GOVERNANCE_AND_COMMIT
+KEY_OUTPUTS:
+- COMMITTED_UPDATES_COUNT: [number]
+- SUPPRESSED_UPDATES_COUNT: [number]
+- DOWNGRADED_UPDATES_COUNT: [number]
+- INVARIANTS_TRIGGERED: [list or NONE]
+GENERATED_IMPULSES:
+- [NONE]
+PROPOSED_UPDATES_COUNT: [number]
+NOTES:
+- HIGHEST_IMPACT_TARGET_FIELDS:
+  - [List 3-5 canonical TARGET_FIELD paths]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

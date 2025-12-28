@@ -1,0 +1,102 @@
+=== SECTION: ALTERATIONS ===
+
+[KEEP: Purpose & Role]
+To register all permanent or temporary baseline deviations from the character's physiological and cognitive norms. It defines objective system changes resulting from biological, cybernetic, magical, or other sources. It does not define the character's emotional response to the alteration.
+
+[KEEP: Relationship to Other Modules]
+Informs: Directly modifies baseline values in BODY. Can also influence SKILLS (e.g., new cybernetic abilities) and MMPI (e.g., psychological trauma from the event).
+Is Informed By: BACKGROUND (context) and MEMORY (recollection and linkage).
+
+=== SECTION_BREAK ===
+
+=== SECTION: ALTERATION_REGISTRY ===
+
+[[LLM_INSTRUCTION]]: List all known alteration IDs. Each listed ID must have a corresponding record block in ALTERATION_RECORDS. If no alterations exist yet, list [NONE]. Do not invent IDs.
+
+ALTERATION_ID:
+- [NONE]
+
+=== SECTION_BREAK ===
+
+=== SECTION: ALTERATION_RECORDS ===
+
+[[LLM_INSTRUCTION]]: Each alteration must have one record block keyed by its ALTERATION_ID. The bracket token must match the ID exactly (e.g., [ALT_01]). Do not create record blocks unless an alteration exists.
+
+[ALT_XX]
+ALTERATION_ID: [ALT_XX]
+ALTERATION_TYPE: [CYBERNETIC | BIOLOGICAL | MAGICAL | TRAUMATIC | CHEMICAL | UNKNOWN]
+ALTERATION_NAME: [Descriptive name]
+
+DURATION: [PERMANENT | TEMPORARY | DEGRADATION | CONDITIONAL]
+STATUS: [ACTIVE | INACTIVE | DORMANT | REJECTED]
+
+OBJECTIVE_SYSTEM_EFFECTS:
+
+PHYSIOLOGICAL_CHANGES:
+
+[[LLM_INSTRUCTION]]: Use canonical bracket paths for BODY fields inside this record when referencing targets, but do not directly update BODY here. Actual changes are proposed by COTs and committed by STATE_GOVERNANCE_AND_COMMIT.
+
+BODY_TARGET:
+- [BODY][SENSORY_MOTOR_ABILITIES][STRENGTH]
+BASELINE_DELTA: [MINOR_ENHANCEMENT | MAJOR_ENHANCEMENT | TRANSFORMATION | IMPAIRMENT]
+
+BODY_TARGET:
+- [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL]
+BASELINE_DELTA: [MINOR_ENHANCEMENT | MAJOR_ENHANCEMENT | TRANSFORMATION | IMPAIRMENT]
+
+NEW_ABILITIES:
+
+[[LLM_INSTRUCTION]]: List granted skills by SKL_XX when known. If a new skill is granted, a SKILLS record should be created via proposals, not directly here.
+
+SKILL_GRANTED:
+- SKL_XX
+SKILL_GRANTED:
+- SKL_XX
+
+VULNERABILITIES_CONSTRAINTS:
+NEW_VULNERABILITY:
+- [e.g., EMP_SENSITIVITY]
+NEW_CONSTRAINT:
+- [e.g., REQUIRES_WEEKLY_MAINTENANCE]
+
+CHARACTER_AWARENESS:
+AWARENESS_STATUS: [FULL | PARTIAL | NONE | MISINFORMED]
+PERCEIVED_CAUSE: [UNKNOWN | LAB_ACCIDENT | GIFT_FROM_GODS | CORPORATE_SABOTAGE | OTHER]
+PERCEIVED_EFFECT: [ACCURATE | UNDERSTATED | INACCURATE | UNKNOWN]
+SOURCE_OF_INFORMATION: [DIRECT_EXPERIENCE | DOCTORS_REPORT | RUMOR | SECOND_HAND | VISION | UNKNOWN]
+
+=== SECTION_BREAK ===
+
+=== SECTION: STATE_TRANSITION_LOGIC ===
+
+[[LLM_INSTRUCTION]]: These are the rules that COTs and STATE_GOVERNANCE_AND_COMMIT use to propose and commit ALTERATIONS state updates. Apply per [ALT_XX] record.
+
+ON_UNMET_CONSTRAINTS:
+- IF [ALTERATIONS][ALT_XX][STATUS] is ACTIVE:
+  - Propose TRANSITION to DORMANT
+  - While DORMANT, physical effects cease unless explicitly modeled as lingering modifiers.
+
+ON_MEETING_CONSTRAINTS:
+- IF [ALTERATIONS][ALT_XX][STATUS] is DORMANT:
+  - Propose TRANSITION to ACTIVE
+
+ON_TRAUMATIC_PSYCHOLOGICAL_REJECTION:
+- Trigger definition:
+  - A MEMORY entry exists with SALIENCE >= 95 and [MEMORY][MEM_XX][SYSTEM_LINKAGE][ASSOCIATED_ALTERATION_ID] = ALT_XX
+- IF [ALTERATIONS][ALT_XX][STATUS] is ACTIVE:
+  - Propose TRANSITION to REJECTED
+  - Physical effects remain active, but this state acts as a chronic stressor.
+  - Preferred expression:
+    - Add_Modifier proposal into TEMPORARY_MODIFIERS targeting:
+      - [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL]
+    - Or if persistent and explicitly justified:
+      - Propose TRANSITION of [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL] toward CHRONIC
+
+ON_REMOVAL_OR_DEACTIVATION_EVENT:
+- Propose SET:
+  - Target_Field: [ALTERATIONS][ALT_XX][STATUS]
+  - Proposed_Value: INACTIVE
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

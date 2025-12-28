@@ -1,0 +1,77 @@
+=== SECTION: MALEVOLENT_BEHAVIOR_SELECTION ===
+
+[KEEP: Purpose & Role]
+This COT template defines how Dark Triad traits override prosocial impulses to generate manipulative, exploitative, and callous behaviors. It provides models for when and how malevolent traits dominate behavioral selection.
+
+[KEEP: Relationship to Other Modules]
+Informs: DECISION_SYNTHESIS (malevolent impulses), RELATIONAL (manipulation patterns), COPE (maladaptive strategies), MEMORY (selective encoding)
+Is Informed By: DARK_TRIAD, HEXACO, RELATIONAL, STRESS_CASCADE_RESOLUTION, BACKGROUND, S_TEMPORARY_MODIFIERS
+
+[[LLM_INSTRUCTION]]: WRITE POLICY OVERRIDE
+This COT is forbidden from directly modifying any persistent module file.
+This COT MUST express intended persistent-state changes ONLY as proposals in S_COGNITIVE_SCRATCHPAD.PROPOSED_UPDATES_REGISTRY using canonical bracket Target_Field paths.
+This COT MAY write impulses and trace output to the scratchpad.
+Only STATE_GOVERNANCE_AND_COMMIT may commit proposals.
+
+[[LLM_INSTRUCTION]]: TEMPORARY_MODIFIERS INTEGRATION
+Read S_TEMPORARY_MODIFIERS for Active modifiers affecting inhibition, masking, arousal, and relational interpretation.
+Prefer TEMPORARY_MODIFIERS for short-term masking/manipulation overlays.
+
+=== SECTION_BREAK ===
+
+=== SECTION: OVERRIDE_EVALUATION ===
+
+[[LLM_INSTRUCTION]]: Determine whether malevolent strategy overrides other impulses.
+
+If override conditions are met:
+- generate a strong malevolent impulse
+- optionally add short-term masking/manipulation modifiers
+
+=== SECTION_BREAK ===
+
+=== SECTION: RELATIONAL_AND_MEMORY_CONTRACT ===
+
+[[LLM_INSTRUCTION]]: Prevent casual permanent rewrites of RELATIONAL and MEMORY.
+
+- For short-term manipulation/mask behavior:
+  - Add_Modifier:
+    - Target_Module: TEMPORARY_MODIFIERS
+    - Modifier_Type: Relational_Modifier or Communication_Modifier
+    - Target_Field: [RELATIONAL][ENT_XX][Perceived_Relationship_Type] or [RELATIONAL][ENT_XX][Current_Concern]
+    - Duration_Type: Scene
+
+- For persistent relationship damage:
+  - Propose step-limited transitions to:
+    - [RELATIONAL][ENT_XX][Affective_Valence]
+    - [RELATIONAL][ENT_XX][Cognitive_Complexity]
+only when repeated behavior or salient memory supports it.
+
+=== SECTION_BREAK ===
+
+=== SECTION: BEHAVIORAL_IMPULSE_GENERATION ===
+
+[[LLM_INSTRUCTION]]: Generate malevolent impulses for DECISION_SYNTHESIS.
+
+Impulse_Output_Format:
+Impulse_Source: MALEVOLENT_BEHAVIOR_SELECTION
+Impulse_Type: [Exploit | Manipulate | Dominate | Mask]
+Impulse_Strength: [0-100]
+Target_ID: [ENT_XX if applicable]
+Justification: [Brief cue-based reason]
+Justification_Category: [Direct_Application]
+
+=== SECTION_BREAK ===
+
+=== SECTION: SYSTEM_UPDATE_DIRECTIVES ===
+
+[[LLM_INSTRUCTION]]: After completing malevolent behavior selection, propose updates using canonical Target_Field paths.
+
+((SYSTEM_REF: UPDATE_CASCADE_REGISTRY → MALEVOLENT_BEHAVIOR_SELECTION_UPDATES))
+
+Verification:
+- Short-term manipulation uses TEMPORARY_MODIFIERS.
+- Persistent RELATIONAL changes are rare and justified.
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

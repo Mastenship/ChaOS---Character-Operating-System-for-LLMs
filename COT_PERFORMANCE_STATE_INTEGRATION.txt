@@ -1,0 +1,279 @@
+=== SECTION: PERFORMANCE_STATE_INTEGRATION ===
+
+[KEEP: Purpose & Role]
+This COT defines how physiological arousal, psychological stress, biochemical conditions, and environmental context modulate skill execution in the moment. It applies Flow Theory, Yerkes-Dodson, motor control research, and cognitive load theory to produce:
+- TEMPORARY_MODIFIERS overlays targeting [SKILLS][SKL_XX][EXECUTION]
+- performance-related behavioral impulses (e.g., EXECUTE_SKILL, AVOID_FAILURE)
+- rare, explicitly justified permanent SKILLS transitions only when SKILLS logic or MEMORY-defined events demand it
+
+[KEEP: Relationship to Other Modules]
+Informs: Skill execution quality via TEMPORARY_MODIFIERS, DECISION_SYNTHESIS impulses, MEMORY formation cues.
+Is Informed By: BODY biochemical markers, STRESS_CASCADE_RESOLUTION outputs, HEXACO trait modulation, ALTERATIONS temporary effects, TEMPORARY_MODIFIERS (existing overlays), narrative task difficulty.
+
+=== SECTION_BREAK ===
+
+=== SECTION: WRITE_POLICY_OVERRIDE ===
+
+[[LLM_INSTRUCTION]]: This COT is forbidden from directly modifying any persistent module file, including BODY, SKILLS, RELATIONAL, MEMORY, ALTERATIONS, DOMINANT_PREDICTIVE_FRAME, GOALS_MOTIVATIONS, BELIEF_SYSTEMS, COMMUNICATION_DIALOGUE, TEMPORAL_DYNAMICS, and TEMPORARY_MODIFIERS.
+
+[[LLM_INSTRUCTION]]: This COT MUST express all intended persistent-state changes ONLY as proposals in:
+- [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+
+[[LLM_INSTRUCTION]]: This COT MAY write behavioral impulses to:
+- [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY]
+
+[[LLM_INSTRUCTION]]: Only STATE_GOVERNANCE_AND_COMMIT may commit proposals into persistent modules and TEMPORARY_MODIFIERS.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TEMPORARY_MODIFIERS_INTEGRATION ===
+
+[[LLM_INSTRUCTION]]: Before calculating performance, read TEMPORARY_MODIFIERS for ACTIVE modifiers that target:
+- [SKILLS][SKL_XX][EXECUTION]
+- [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL]
+- [BODY][BIOCHEMICAL_STATE_MARKERS][ADRENALINE]
+- cognitive load or environmental stress
+
+[[LLM_INSTRUCTION]]: Apply modifiers as overlays and avoid duplicating the same mechanism tag on the same target in the same cycle.
+
+=== SECTION_BREAK ===
+
+=== SECTION: SCIENTIFIC_MODELS ===
+
+[[LLM_INSTRUCTION]]: Apply these performance research frameworks.
+
+SCIENTIFIC_MODELS:
+- FLOW_THEORY
+- YERKES_DODSON_LAW
+- EMBODIED_COGNITION
+- MOTOR_SCHEMA_THEORY
+- CHOKING_THEORY
+- COGNITIVE_LOAD_THEORY
+
+=== SECTION_BREAK ===
+
+=== SECTION: PERFORMANCE_OUTPUT_CONTRACT ===
+
+[[LLM_INSTRUCTION]]: This COT does not permanently change SKILLS for ordinary performance variation.
+
+Rules:
+- Use TEMPORARY_MODIFIERS for:
+  - execution boost or degradation
+  - choking risk
+  - tremor risk
+  - flow boosts
+  - cognitive load penalties
+- Only propose permanent SKILLS state transitions when:
+  - a MEMORY-defined breakthrough or trauma exists OR
+  - SKILLS.STATE_TRANSITION_LOGIC conditions are explicitly met
+and tag:
+- MECHANISM_TAG: SKILL_STATE_CHANGE
+
+=== SECTION_BREAK ===
+
+=== SECTION: CANONICAL_TARGETS ===
+
+[[LLM_INSTRUCTION]]: Use canonical bracket paths for all proposals.
+
+Primary_Target_For_Performance:
+- [SKILLS][SKL_XX][EXECUTION]
+
+Supporting_Read_Targets:
+- [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL]
+- [BODY][BIOCHEMICAL_STATE_MARKERS][ADRENALINE]
+
+Optional_Permanent_Targets:
+- [SKILLS][SKL_XX][MASTERY_LEVEL]
+- [SKILLS][SKL_XX][INSTINCT_LEVEL]
+- [SKILLS][SKL_XX][GROWTH_POTENTIAL]
+
+=== SECTION_BREAK ===
+
+=== SECTION: AROUSAL_PERFORMANCE_MATRIX ===
+
+[[LLM_INSTRUCTION]]: Convert arousal and task demands into modifier proposals.
+
+Heuristic_Assessment:
+- TASK_TYPE: [COGNITIVE_COMPLEX | FINE_MOTOR | GROSS_MOTOR | SOCIAL_PERFORMANCE | COMBAT]
+- TASK_DIFFICULTY: [LOW | MODERATE | HIGH | EXTREME]
+- AROUSAL_LEVEL_PROXY:
+  - derive from narrative + endocrine states + existing arousal modifiers:
+  - [LOW | MODERATE | HIGH | OVERLOAD]
+
+Typical_Effects:
+- LOW arousal:
+  - under-engagement risk, slower reaction
+- MODERATE arousal:
+  - best performance for many tasks
+- HIGH arousal:
+  - boosts gross motor and simple actions
+  - degrades complex cognition and fine motor
+- OVERLOAD:
+  - choking, fragmentation, impulsive errors
+
+=== SECTION_BREAK ===
+
+=== SECTION: PERFORMANCE_MODIFIER_PROPOSALS ===
+
+[[LLM_INSTRUCTION]]: All performance outputs should be expressed primarily as ADD_MODIFIER proposals into TEMPORARY_MODIFIERS.
+
+General_Performance_Modifier_Format:
+- Propose ADD_MODIFIER:
+  TARGET_MODULE: TEMPORARY_MODIFIERS
+  TARGET_FIELD: [SKILLS][SKL_XX][EXECUTION]
+  OPERATION_TYPE: ADD_MODIFIER
+  PROPOSED_VALUE:
+    MODIFIER_TYPE: PERFORMANCE_MODIFIER
+    MECHANISM_TAG: [PERFORMANCE_PRESSURE | HPA_AXIS | SYMPATHETIC | FLOW_STATE | FATIGUE | ENVIRONMENTAL_STRESS]
+    TARGET_FIELD: [SKILLS][SKL_XX][EXECUTION]
+    TARGET_ID: SKL_XX
+    EFFECT_EXPRESSION: [Machine-stable short phrase]
+    MAGNITUDE: [e.g., +10_PERCENT | -30_PERCENT]
+    STACKING_RULE: REPLACE
+    DURATION_TYPE: SCENE
+    DURATION_VALUE: THIS_SCENE
+    EXPIRY_CONDITION: SCENE_TRANSITION
+    JUSTIFICATION: [Cue-based justification]
+
+Cognitive_Complex_Task_Under_High_Arousal:
+- Typical proposal:
+  MODIFIER_TYPE: COGNITIVE_LOAD_MODIFIER
+  MECHANISM_TAG: SYMPATHETIC
+  EFFECT_EXPRESSION: HIGH_AROUSAL_DEGRADES_COMPLEX_EXECUTION
+  MAGNITUDE: -20_PERCENT to -40_PERCENT
+
+Gross_Motor_Task_Under_High_Arousal:
+- Typical proposal:
+  MODIFIER_TYPE: PERFORMANCE_MODIFIER
+  MECHANISM_TAG: SYMPATHETIC
+  EFFECT_EXPRESSION: HIGH_AROUSAL_BOOSTS_GROSS_MOTOR
+  MAGNITUDE: +10_PERCENT to +25_PERCENT
+
+=== SECTION_BREAK ===
+
+=== SECTION: FLOW_STATE_CONDITIONS ===
+
+[[LLM_INSTRUCTION]]: If flow conditions are met, express it as a TEMPORARY_MODIFIERS entry. Do not rewrite SKILLS baselines.
+
+Flow_Conditions_Heuristic:
+- SKILL_CHALLENGE_MATCH: TRUE
+- DISTRACTION_LOW: TRUE
+- FEEDBACK_CLEAR: TRUE
+- AGENCY_HIGH: TRUE
+
+Flow_State_Proposal:
+- Propose ADD_MODIFIER:
+  MODIFIER_TYPE: PERFORMANCE_MODIFIER
+  MECHANISM_TAG: FLOW_STATE
+  TARGET_FIELD: [SKILLS][SKL_XX][EXECUTION]
+  TARGET_ID: SKL_XX
+  EFFECT_EXPRESSION: FLOW_STATE_BOOST
+  MAGNITUDE: +30_PERCENT
+  STACKING_RULE: REPLACE
+  DURATION_TYPE: SCENE
+  DURATION_VALUE: THIS_SCENE
+  EXPIRY_CONDITION: SCENE_TRANSITION
+  JUSTIFICATION: FLOW_CONDITIONS_PRESENT
+
+=== SECTION_BREAK ===
+
+=== SECTION: CHOKING_AND_FINE_MOTOR_RISK ===
+
+[[LLM_INSTRUCTION]]: Pressure and choking should be modeled as modifiers. Do not permanently drop INSTINCT_LEVEL for ordinary choking.
+
+Choking_Risk_Proposal:
+- Propose ADD_MODIFIER:
+  MODIFIER_TYPE: COGNITIVE_LOAD_MODIFIER
+  MECHANISM_TAG: PERFORMANCE_PRESSURE
+  TARGET_FIELD: [SKILLS][SKL_XX][EXECUTION]
+  TARGET_ID: SKL_XX
+  EFFECT_EXPRESSION: CHOKING_RISK_INCREASED_EXPLICIT_MONITORING
+  MAGNITUDE: -20_PERCENT
+  STACKING_RULE: REPLACE
+  DURATION_TYPE: SCENE
+  DURATION_VALUE: THIS_SCENE
+  EXPIRY_CONDITION: SCENE_TRANSITION
+  JUSTIFICATION: EVALUATION_OR_HIGH_STAKES_CUES_PRESENT
+
+=== SECTION_BREAK ===
+
+=== SECTION: ALTERATION_INTEGRATION ===
+
+[[LLM_INSTRUCTION]]: Alteration impacts on performance should be applied as:
+- TEMPORARY_MODIFIERS for transient effects
+- SKILLS record creation only when a new skill is granted
+- Permanent SKILLS transitions only when explicitly justified
+
+If an alteration grants temporary enhancement:
+- Propose ADD_MODIFIER:
+  MODIFIER_TYPE: ALTERATION_TEMPORARY_MODIFIER
+  MECHANISM_TAG: ALTERATION_EFFECT
+  TARGET_FIELD: [SKILLS][SKL_XX][EXECUTION]
+  TARGET_ID: SKL_XX
+  EFFECT_EXPRESSION: ALTERATION_TEMPORARY_ENHANCEMENT
+  MAGNITUDE: +15_PERCENT (typical)
+  STACKING_RULE: REPLACE
+  DURATION_TYPE: UNTIL_CONDITION
+  DURATION_VALUE: UNTIL_ALTERATION_INACTIVE_OR_DORMANT
+  EXPIRY_CONDITION: ALTERATION_STATUS_NOT_ACTIVE
+  JUSTIFICATION: ACTIVE_ALTERATION_GRANTS_TEMPORARY_BOOST
+
+=== SECTION_BREAK ===
+
+=== SECTION: PERMANENT_SKILLS_CHANGE_GATE ===
+
+[[LLM_INSTRUCTION]]: Permanent SKILLS changes are rare. Only propose when a rule is explicitly satisfied.
+
+Allowed_Permanent_Triggers:
+- SKILLS transition logic conditions explicitly met (e.g., SUCCESSFUL_USE_AND_CHALLENGING, SIGNIFICANT_NEGLECT, BREAKTHROUGH_EVENT, TRAUMATIC_EVENT)
+- MEMORY-defined breakthrough or trauma explicitly linked to the skill
+
+If triggered:
+- Propose TRANSITION:
+  TARGET_FIELD: [SKILLS][SKL_XX][MASTERY_LEVEL] or [SKILLS][SKL_XX][INSTINCT_LEVEL] or [SKILLS][SKL_XX][GROWTH_POTENTIAL]
+  MECHANISM_TAG: SKILL_STATE_CHANGE
+  JUSTIFICATION: Must reference the exact trigger condition
+
+=== SECTION_BREAK ===
+
+=== SECTION: BEHAVIORAL_IMPULSE_GENERATION ===
+
+[[LLM_INSTRUCTION]]: Generate behavioral impulses based on performance state for DECISION_SYNTHESIS.
+
+Impulse_Types:
+- EXECUTE_SKILL
+- AVOID_FAILURE
+- SEEK_FLOW
+- SKILL_PRACTICE
+- SHOW_OFF
+
+Impulse_Output_Format:
+IMPULSE_SOURCE: PERFORMANCE_STATE_INTEGRATION
+IMPULSE_TYPE: [EXECUTE_SKILL | AVOID_FAILURE | SEEK_FLOW | SKILL_PRACTICE | SHOW_OFF]
+IMPULSE_STRENGTH: [0-100]
+TARGET_ID: [SKL_XX if applicable]
+JUSTIFICATION: [Brief cue-based reason]
+JUSTIFICATION_CATEGORY: DIRECT_APPLICATION
+
+=== SECTION_BREAK ===
+
+=== SECTION: SYSTEM_UPDATE_DIRECTIVES ===
+
+[[LLM_INSTRUCTION]]: After completing performance state integration:
+- Write proposals only into [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+- Write impulses only into [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY]
+- Append a TRACE_ENTRY into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+
+TRACE_ENTRY_MINIMUM_FIELDS:
+COT_NAME: PERFORMANCE_STATE_INTEGRATION
+KEY_OUTPUTS:
+- [Performance state summary, e.g., HIGH_AROUSAL_COMPLEX_TASK_PENALTY]
+GENERATED_IMPULSES:
+- [List of impulse types]
+PROPOSED_UPDATES_COUNT: [Number]
+NOTES:
+- [Short notes]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

@@ -1,0 +1,28 @@
+=== SECTION: DARK_TRIAD ===
+
+[KEEP: Purpose & Role] This template defines a character's interpersonal strategy and malevolent personality traits using the Dark Triad model. It assesses tendencies towards social manipulation, self-absorption, and a lack of empathy.
+
+[KEEP: Relationship to Other Modules]
+
+Informs: Brain-Body Link logic within the main Character System. Is Informed By: Background Layer (formative environment can influence trait expression).
+
+=== SECTION_BREAK ===
+
+=== SECTION: CORE_TRAIT_MARKERS ===
+
+Define each trait using the specified format: Trait Name: [percentile]. Percentiles are qualitative (e.g., "80th percentile" = high). 50th percentile represents the average human baseline. Do not add any additional interpretation or flavor text in this section.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TRAIT_DEFINITIONS ===
+
+[Trait Definitions]
+Narcissism: Grandiose self-view, entitlement, dominance, and a need for admiration.
+
+Machiavellianism: Strategic manipulation, cynicism, a pragmatic and amoral approach to social interaction.
+
+Psychopathy: High impulsivity, thrill-seeking, callousness, and a lack of remorse or empathy.
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]
