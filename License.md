@@ -12,4 +12,4 @@ Under the following terms:
 - **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. 
 - **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license. 
 
-Full license text: https://creativecommons. org/licenses/by-sa/4.0/legalcode
+Full license text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
