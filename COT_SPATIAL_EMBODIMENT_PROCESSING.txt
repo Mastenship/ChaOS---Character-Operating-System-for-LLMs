@@ -1,0 +1,219 @@
+=== SECTION: SPATIAL_EMBODIMENT_PROCESSING ===
+
+[KEEP: Purpose & Role]
+This COT template defines how spatial position, proximity, and environmental features modulate stress, social dynamics, performance, and decision-making using Environmental Psychology, Proxemics, and Embodied Cognition research. It provides models for translating map data into embodied experience.
+
+[KEEP: Relationship to Other Modules]
+Informs: STRESS_CASCADE_RESOLUTION (spatial threats), PERFORMANCE_STATE_INTEGRATION (environmental modifiers), RELATIONAL (proximity effects), MEMORY (spatial context encoding)
+Is Informed By: MAP_DATA (current location and environment), BODY (sensory capabilities), HEXACO (spatial processing traits), ALTERATIONS (sensory modifications)
+
+=== SECTION_BREAK ===
+
+=== SECTION: WRITE_POLICY_OVERRIDE ===
+
+[[LLM_INSTRUCTION]]: This COT is forbidden from directly modifying any persistent module file (e.g., BODY, SKILLS, RELATIONAL, MEMORY, ALTERATIONS, DOMINANT_PREDICTIVE_FRAME, GOALS_MOTIVATIONS, BELIEF_SYSTEMS, COMMUNICATION_DIALOGUE, TEMPORAL_DYNAMICS, TEMPORARY_MODIFIERS).
+This COT MUST express all intended persistent-state changes ONLY as proposals in [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY] using canonical bracket TARGET_FIELD paths.
+This COT MAY write behavioral impulses to [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY] and trace output to [COGNITIVE_SCRATCHPAD][CASCADE_TRACE].
+Only STATE_GOVERNANCE_AND_COMMIT may commit proposals into persistent modules and TEMPORARY_MODIFIERS.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TEMPORARY_MODIFIERS_INTEGRATION ===
+
+[[LLM_INSTRUCTION]]: Before generating impulses or environment-derived penalties, read TEMPORARY_MODIFIERS for ACTIVE entries relevant to spatial stress, sensory load, proxemics, and environmental performance.
+
+Apply modifier effects as overlays and do not rewrite baseline HARD_STATE fields due to modifiers.
+
+When applying a transient environmental effect (minutes to scene-scale), propose it as an ADD_MODIFIER operation targeting TEMPORARY_MODIFIERS.
+
+If an ACTIVE modifier expiry condition is clearly met by current narrative input, propose a REMOVE_MODIFIER operation.
+
+=== SECTION_BREAK ===
+
+=== SECTION: SCIENTIFIC_MODELS ===
+
+[[LLM_INSTRUCTION]]: Apply these spatial cognition and environmental psychology frameworks.
+
+SCIENTIFIC_MODELS:
+- PROXEMICS_THEORY
+- COGNITIVE_MAP_THEORY
+- TERRITORIALITY_THEORY
+- PERIPERSONAL_SPACE
+- ENVIRONMENTAL_STRESS_MODEL
+- GIBSON_AFFORDANCES
+- PROSPECT_REFUGE_THEORY
+
+=== SECTION_BREAK ===
+
+=== SECTION: MAP_DATA_PARSING ===
+
+[[LLM_INSTRUCTION]]: Extract and process spatial information from MAP_REGISTRY format.
+
+Core_Spatial_Elements:
+CURRENT_POSITION: [Room_Name, Grid_Coordinate]
+ROOM_DIMENSIONS: [Approximate size]
+EXIT_ACCESSIBILITY: [Count transitions and locked status]
+OBSTACLE_DENSITY: [LOW | MODERATE | HIGH]
+SIGHT_LINES: [OPEN | BROKEN | BLOCKED]
+HIDE_SPOTS: [NONE | FEW | MANY]
+COVER_OPTIONS: [NONE | LIMITED | GOOD]
+
+Sensory_Layer_Processing:
+AUDITORY_MAP: [Key sounds and likely sources]
+OLFACTORY_MAP: [Key smells and likely sources]
+TACTILE_MAP: [Surfaces, vibration, drafts]
+THERMAL_MAP: [COMFORTABLE | COLD | HOT | EXTREME]
+VISUAL_MAP: [BRIGHT | DIM | DARK | FLICKERING]
+
+Threat_Spatialization:
+THREAT_PRESENCE: [NONE | POSSIBLE | CONFIRMED]
+THREAT_PROXIMITY: [INTIMATE | PERSONAL | SOCIAL | PUBLIC | UNKNOWN]
+EGRESS_AVAILABILITY: [TRAPPED | LIMITED | ADEQUATE | MANY]
+CHOKE_POINTS: [NONE | PRESENT]
+DEAD_ENDS: [NONE | PRESENT]
+
+=== SECTION_BREAK ===
+
+=== SECTION: ENVIRONMENTAL_STRESSOR_ACCUMULATION ===
+
+[[LLM_INSTRUCTION]]: Compute environmental stressors and express them primarily as TEMPORARY_MODIFIERS.
+
+Environmental_Stressors:
+NOISE_LEVEL:
+- BELOW_60DB: no stress
+- BETWEEN_60_AND_85DB: mild stress, cognitive interference
+- ABOVE_85DB: significant stress, communication impaired
+
+TEMPERATURE:
+- BETWEEN_65_AND_75F: comfort
+- BELOW_50F or ABOVE_85F: mild thermal stress
+- BELOW_32F or ABOVE_95F: severe thermal stress
+
+AIR_QUALITY:
+- MUSTY_OR_STALE: cognitive interference
+- CHEMICAL_ODORS: nausea and headache risk
+- SMOKE_OR_DUST: respiratory stress
+
+LIGHTING:
+- ADEQUATE: no modifier
+- DIM: anxiety increase, detail loss
+- DARK: high anxiety, navigation stress
+- FLICKERING: distraction, headache
+
+Cumulative_Effect:
+- 1 stressor: manageable
+- 2 stressors: noticeable
+- 3 or more: overload risk
+
+[[LLM_INSTRUCTION]]: For each detected environmental stressor, generate an ADD_MODIFIER proposal into TEMPORARY_MODIFIERS with:
+- MODIFIER_TYPE: ENVIRONMENTAL_MODIFIER
+- TARGET_FIELD: typically [SKILLS][SKL_XX][EXECUTION] for the relevant skill
+- DURATION_TYPE: SCENE or UNTIL_CONDITION
+- EXPIRY_CONDITION: SCENE_TRANSITION or LEFT_ENVIRONMENT
+
+=== SECTION_BREAK ===
+
+=== SECTION: PROXEMIC_STRESS_CALCULATIONS ===
+
+[[LLM_INSTRUCTION]]: Determine whether spatial proximity should generate endocrine transitions (rare) or TEMPORARY_MODIFIERS (common).
+
+Intimate_Space_Violation:
+- If enemy, weapon, or imminent harm cues exist:
+  - Propose endocrine TRANSITION:
+    - [BODY][BIOCHEMICAL_STATE_MARKERS][ADRENALINE] ONE_STEP_TOWARD_PEAK
+    - [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL] ONE_STEP_TOWARD_SPIKE
+- Otherwise:
+  - Propose ADD_MODIFIER overlays as AROUSAL_MODIFIER or RELATIONAL_MODIFIER.
+
+Crowding:
+- Prefer ADD_MODIFIER:
+  MODIFIER_TYPE: ENVIRONMENTAL_MODIFIER
+  TARGET_FIELD: [SKILLS][SKL_XX][EXECUTION]
+  EFFECT_EXPRESSION: CROWDING_REDUCES_COGNITIVE_BANDWIDTH_INCREASES_VIGILANCE
+  DURATION_TYPE: SCENE
+
+=== SECTION_BREAK ===
+
+=== SECTION: TERRITORIAL_BEHAVIOR_PATTERNS ===
+
+[[LLM_INSTRUCTION]]: Generate spatially-driven impulses and avoid rewriting baseline personality traits.
+
+Territory_Classification:
+- SAFE_SPACE
+- CONTESTED_SPACE
+- DANGER_SPACE
+- UNFAMILIAR_SPACE
+
+Impulse_Tendencies:
+- SAFE_SPACE: rest and plan impulses increase
+- DANGER_SPACE: escape, hide, fight impulses increase
+- UNFAMILIAR_SPACE: explore or caution based on HEXACO openness and stress
+
+=== SECTION_BREAK ===
+
+=== SECTION: SPATIAL_AFFORDANCE_RECOGNITION ===
+
+[[LLM_INSTRUCTION]]: Identify action possibilities in environment and translate into action options for DECISION_SYNTHESIS.
+
+Affordances:
+- DEFENSIVE: corner, doorway control, furniture cover, high ground
+- ESCAPE: exits, windows, line-of-sight breaks
+- HIDE: containers, shadows, crowds, alcoves
+- OFFENSIVE: improvised weapons, elevation, choke points
+
+=== SECTION_BREAK ===
+
+=== SECTION: COGNITIVE_MAP_CONSTRUCTION ===
+
+[[LLM_INSTRUCTION]]: Encode spatial context for MEMORY candidates when salient.
+
+Spatial_Encoding_Triggers:
+- threat and location specificity
+- novel distinctive environment
+- emotionally intense event in a distinct room
+
+When triggered:
+- Provide cues for MEMORY_FORMATION_CRITERIA. Do not directly create MEMORY here.
+
+=== SECTION_BREAK ===
+
+=== SECTION: BEHAVIORAL_IMPULSE_GENERATION ===
+
+[[LLM_INSTRUCTION]]: Generate spatial impulses and write them to [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY].
+
+Impulse_Output_Format:
+IMPULSE_SOURCE: SPATIAL_EMBODIMENT_PROCESSING
+IMPULSE_TYPE: [CLAIM_TERRITORY | ESCAPE | HIDE | EXPLORE | FORTIFY_POSITION | PROXEMIC_ADJUSTMENT | SENSORY_OVERWHELM_ESCAPE]
+IMPULSE_STRENGTH: [0-100]
+TARGET_ID: [Optional ENT_XX or location token, else NONE]
+JUSTIFICATION: [Brief cue-based reason]
+JUSTIFICATION_CATEGORY: DIRECT_APPLICATION
+
+=== SECTION_BREAK ===
+
+=== SECTION: SYSTEM_UPDATE_DIRECTIVES ===
+
+[[LLM_INSTRUCTION]]: After completing spatial embodiment processing:
+- Write proposals only into [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+- Write impulses only into [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY]
+- Append a TRACE_ENTRY into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+
+Update_Checklist:
+- Propose ADD_MODIFIER into TEMPORARY_MODIFIERS for each salient environmental stressor.
+- Use canonical TARGET_FIELD paths such as [SKILLS][SKL_XX][EXECUTION].
+- Only propose endocrine transitions if explicit threat cues justify them:
+  - [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL]
+  - [BODY][BIOCHEMICAL_STATE_MARKERS][ADRENALINE]
+- If proximity changes meaning toward an entity:
+  - Propose RELATIONAL_MODIFIER or step-limited transition targeting:
+    - [RELATIONAL][ENT_XX][CURRENT_CONCERN]
+    - [RELATIONAL][ENT_XX][AFFECTIVE_VALENCE]
+
+Verification:
+- All proposals are written only into [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY].
+- All TARGET_FIELD values use canonical UPPER_SNAKE tokens.
+- Transient effects are expressed as TEMPORARY_MODIFIERS, not baseline rewrites.
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

@@ -1,0 +1,237 @@
+=== SECTION: DPF_SYNTHESIS_PROCESSING ===
+
+[DM_SCOPE_NOTE]
+This COT synthesizes the character's DOMINANT_PREDICTIVE_FRAME (DPF) as a living, integrated state. It is not a narration engine. It does not select actions. It produces:
+- A current-cycle scratchpad DPF snapshot for DECISION_SYNTHESIS
+- Governed proposals to update [DOMINANT_PREDICTIVE_FRAME] when thresholds are met
+
+=== SECTION_BREAK ===
+
+=== SECTION: WRITE_POLICY (STRICT) ===
+
+[[LLM_INSTRUCTION]]: This COT may NOT directly edit persistent modules.
+
+Allowed writes:
+- [COGNITIVE_SCRATCHPAD][CURRENT_DPF] (scratchpad snapshot)
+- Proposals ONLY in: [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+- Trace ONLY in: [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+
+Disallowed:
+- Direct edits to [DOMINANT_PREDICTIVE_FRAME]
+- Direct edits to any other persistent module
+
+=== SECTION_BREAK ===
+
+=== SECTION: INPUTS_THIS_COT_READS ===
+
+Primary inputs:
+- [COGNITIVE_SCRATCHPAD][CYCLE_METADATA]
+- [COGNITIVE_SCRATCHPAD][TEMPORARY_STATE_FLAGS]
+- [BODY]
+- [RELATIONAL]
+- [GOALS_MOTIVATIONS]
+- [BELIEF_SYSTEMS]
+- [MEMORY]
+- [TEMPORARY_MODIFIERS][MODIFIER_REGISTRY] (ACTIVE entries)
+- [DOMINANT_PREDICTIVE_FRAME] (previous persisted frame)
+
+Secondary inputs:
+- [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY] (for context only, not selection)
+
+=== SECTION_BREAK ===
+
+=== SECTION: OUTPUTS_THIS_COT_MUST_PRODUCE ===
+
+[[LLM_INSTRUCTION]]: This COT must produce these outputs every cycle.
+
+REQUIRED_OUTPUTS:
+1) [COGNITIVE_SCRATCHPAD][CURRENT_DPF] snapshot (always)
+2) Proposals (optional, only when commit gates pass)
+3) TRACE_ENTRY (always)
+
+=== SECTION_BREAK ===
+
+=== SECTION: CORE_SYNTHESIS_OBJECTIVE ===
+
+[[LLM_INSTRUCTION]]: Compute the best current subjective predictive frame.
+
+DPF_SYNTHESIS_OBJECTIVE:
+- Integrate:
+  - Physiological state (BODY) as arousal and threat bias
+  - Relationship expectations (RELATIONAL) as social risk or support
+  - Drive pressures (GOALS_MOTIVATIONS.DRIVE_STATES and ACTIVE goals)
+  - Meaning lens (BELIEF_SYSTEMS)
+  - Salient recent memories (MEMORY, especially high SALIENCE)
+  - Active modifiers (TEMPORARY_MODIFIERS)
+- Produce a single coherent CORE_ASSUMPTION and supporting predictions.
+- Remain subjective: statements are the PC's best current theory, not objective truth.
+
+=== SECTION_BREAK ===
+
+=== SECTION: SCRATCHPAD_CURRENT_DPF_SCHEMA ===
+
+[[LLM_INSTRUCTION]]: Populate [COGNITIVE_SCRATCHPAD][CURRENT_DPF] using this internal schema.
+
+CURRENT_DPF_SCHEMA:
+DPF_CORE_STATE:
+CORE_ASSUMPTION:
+VALUE:
+SOURCE:
+EMOTIONAL_VALENCE:
+VALUE:
+SOURCE:
+SOURCE_CAUSALITY:
+VALUE:
+SOURCE:
+SOCIAL_STANCE:
+VALUE:
+SOURCE:
+
+DPF_METRICS:
+CERTAINTY_LEVEL:
+VALUE:
+SOURCE:
+PACE:
+VALUE:
+SOURCE:
+
+PREDICTION_REGISTRY:
+ACTIVE_PREDICTIONS:
+- PREDICTION_ID:
+  TARGET:
+  HYPOTHESIS:
+  PARENT_DPF:
+  STATE:
+  CERTAINTY:
+
+=== SECTION_BREAK ===
+
+=== SECTION: CONTRAST_EVENT_DETECTION ===
+
+[[LLM_INSTRUCTION]]: Detect whether a DPF contrast event occurred this cycle.
+
+DPF_CONTRAST_EVENT_DEFINITION:
+A contrast event exists if at least one is true:
+- New user input explicitly contradicts an ACTIVE prediction hypothesis.
+- A MEMORY with SALIENCE >= 85 is created or updated this cycle that conflicts with CORE_ASSUMPTION.
+- [COGNITIVE_SCRATCHPAD][TEMPORARY_STATE_FLAGS][DPF_RECALC_QUEUED] = TRUE.
+
+CONTRAST_EVENT_PROOF_REQUIREMENT:
+- Record a short proof note in JUSTIFICATION when proposing DPF changes:
+  - Explicit cue(s)
+  - Which prediction or assumption was contradicted
+  - Why the replacement is coherent
+
+=== SECTION_BREAK ===
+
+=== SECTION: PREDICTION_REGISTRY_MAINTENANCE_RULES ===
+
+[[LLM_INSTRUCTION]]: Maintain a small, useful active set of predictions.
+
+PREDICTION_SET_LIMIT:
+- Maintain 1 to 4 ACTIVE predictions maximum.
+- Prefer predictions that are relevant to:
+  - current threats (SAFETY drive)
+  - active high-urgency goals
+  - key relationships in the scene (ENT_XX referenced)
+
+PREDICTION_ID_POLICY:
+- Use PRD_01, PRD_02, PRD_03, PRD_04 in order.
+- Reuse an existing PRD_XX if updating its hypothesis, rather than creating unbounded new IDs.
+
+PREDICTION_STATE_UPDATES:
+- If contradicted this cycle:
+  - Set [DOMINANT_PREDICTIVE_FRAME][PREDICTION_REGISTRY][PRD_XX][STATE] to FALSIFIED via proposal
+  - Reduce [DOMINANT_PREDICTIVE_FRAME][DPF_METRICS][CERTAINTY_LEVEL][VALUE] via proposal (bounded by governance rule)
+- If confirmed this cycle:
+  - Set STATE to RESOLVED via proposal
+  - Increase CERTAINTY_LEVEL by a modest amount via proposal
+
+=== SECTION_BREAK ===
+
+=== SECTION: COMMIT_GATES (WHEN_TO_PROPOSE_PERSISTENT_UPDATES) ===
+
+[[LLM_INSTRUCTION]]: Only propose persistent updates to [DOMINANT_PREDICTIVE_FRAME] when gates pass.
+
+ALWAYS_ALLOWED:
+- Write [COGNITIVE_SCRATCHPAD][CURRENT_DPF] every cycle (no proposals required)
+
+PERSISTENT_UPDATE_ALLOWED_IF_ANY:
+- DPF_CONTRAST_EVENT detected
+- [COGNITIVE_SCRATCHPAD][TEMPORARY_STATE_FLAGS][DPF_RECALC_QUEUED] = TRUE
+- CERTAINTY drift: CURRENT_DPF CERTAINTY differs from persisted CERTAINTY by >= 20
+- Time drift: INFERRED_TIME_PASSAGE indicates HOURS_LATER or DAYS_LATER and no strong anchoring event exists
+
+PERSISTENT_UPDATE_NOT_ALLOWED_IF:
+- No new cues and no drift thresholds met
+- Proposed change is purely stylistic or rewording without causal difference
+
+=== SECTION_BREAK ===
+
+=== SECTION: PROPOSAL_EMISSION_RULES ===
+
+[[LLM_INSTRUCTION]]: When a gate passes, emit proposals into [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY].
+
+PROPOSAL_RULES:
+- Use canonical TARGET_FIELD paths.
+- OPERATION_TYPE:
+  - Use SET for:
+    - [DOMINANT_PREDICTIVE_FRAME][DPF_CORE_STATE][CORE_ASSUMPTION][VALUE]
+    - [DOMINANT_PREDICTIVE_FRAME][DPF_CORE_STATE][EMOTIONAL_VALENCE][VALUE]
+    - [DOMINANT_PREDICTIVE_FRAME][DPF_CORE_STATE][SOURCE_CAUSALITY][VALUE]
+    - [DOMINANT_PREDICTIVE_FRAME][DPF_CORE_STATE][SOCIAL_STANCE][VALUE]
+  - Use TRANSITION for:
+    - [DOMINANT_PREDICTIVE_FRAME][DPF_METRICS][CERTAINTY_LEVEL][VALUE] (bounded by overlay)
+    - [DOMINANT_PREDICTIVE_FRAME][DPF_METRICS][PACE][VALUE] when step-based transitions are defined, else SET
+- Always include:
+  - PROPOSAL_ID
+  - SOURCE_COT: DPF_SYNTHESIS_PROCESSING
+  - TARGET_MODULE: DOMINANT_PREDICTIVE_FRAME
+  - MECHANISM_TAG: DPF_CONTRAST_EVENT or DPF_TIME_DRIFT or DPF_GOAL_PRESSURE or DPF_BODY_AROUSAL
+  - STRENGTH: 0-100
+  - JUSTIFICATION: cue-based, subjective
+
+PREDICTION_PROPOSALS:
+- Allowed to create or update:
+  - [DOMINANT_PREDICTIVE_FRAME][PREDICTION_REGISTRY][PRD_XX][PREDICTION_ID]
+  - [DOMINANT_PREDICTIVE_FRAME][PREDICTION_REGISTRY][PRD_XX][TARGET]
+  - [DOMINANT_PREDICTIVE_FRAME][PREDICTION_REGISTRY][PRD_XX][HYPOTHESIS]
+  - [DOMINANT_PREDICTIVE_FRAME][PREDICTION_REGISTRY][PRD_XX][PARENT_DPF]
+  - [DOMINANT_PREDICTIVE_FRAME][PREDICTION_REGISTRY][PRD_XX][STATE]
+  - [DOMINANT_PREDICTIVE_FRAME][PREDICTION_REGISTRY][PRD_XX][CERTAINTY]
+- Use SET for these fields unless you later define transition orders.
+
+=== SECTION_BREAK ===
+
+=== SECTION: GOAL_LINKAGE_RULES ===
+
+[[LLM_INSTRUCTION]]: Use ID-scoped goal records when forming predictions.
+
+GOAL_LINKAGE_RULES:
+- Prefer GOAL_RECORDS entries:
+  - [GOALS_MOTIVATIONS][GOAL_RECORDS][GOAL_XX]
+- If a goal is ACTIVE and URGENCY >= 7:
+  - It may spawn a prediction:
+    - TARGET: the obstacle, opportunity, or critical dependency
+    - HYPOTHESIS: what will happen if I act or do not act
+    - CERTAINTY: derived from SKILLS confidence, RELATIONAL trust, and BODY arousal
+
+=== SECTION_BREAK ===
+
+=== SECTION: TRACE_OUTPUT ===
+
+[[LLM_INSTRUCTION]]: Append a TRACE_ENTRY into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE].
+
+TRACE_ENTRY_MINIMUM_FIELDS:
+COT_NAME: DPF_SYNTHESIS_PROCESSING
+KEY_OUTPUTS:
+- [One-line: CORE_ASSUMPTION summary plus certainty and pace]
+GENERATED_IMPULSES:
+- [NONE]
+PROPOSED_UPDATES_COUNT: [Number]
+NOTES:
+- [DPF_CONTRAST_EVENT yes or no, DPF_RECALC_QUEUED value, active PRD_XX list]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

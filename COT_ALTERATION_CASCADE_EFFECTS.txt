@@ -1,0 +1,150 @@
+=== SECTION: ALTERATION_CASCADE_EFFECTS ===
+
+[KEEP: Purpose & Role]
+This COT template defines how deviations from baseline (illness, injury, enhancement, curse, blessing, modification) propagate through physiological, psychological, and skill systems. It provides the LLM with models for calculating multi-system impacts of any alteration to the character's normal state.
+
+[KEEP: Relationship to Other Modules]
+Informs: ALTERATIONS (status transitions and record updates), BODY (baseline modifications), SKILLS (capability changes), MEMORY (alteration experiences), MMPI (psychological adaptation via memory and pressure)
+Is Informed By: ALTERATIONS (ALT_XX records), BODY, SKILLS, BACKGROUND, HEXACO, ASQ, TEMPORARY_MODIFIERS (active overlays)
+
+=== SECTION_BREAK ===
+
+=== SECTION: WRITE_POLICY_OVERRIDE ===
+
+[[LLM_INSTRUCTION]]: This COT is forbidden from directly modifying any persistent module file (e.g., BODY, SKILLS, RELATIONAL, MEMORY, ALTERATIONS, DOMINANT_PREDICTIVE_FRAME, GOALS_MOTIVATIONS, BELIEF_SYSTEMS, COMMUNICATION_DIALOGUE, TEMPORAL_DYNAMICS, TEMPORARY_MODIFIERS).
+This COT MUST express all intended persistent-state changes ONLY as proposals in [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY] using canonical bracket TARGET_FIELD paths.
+This COT MAY write behavioral impulses to [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY] and trace output to [COGNITIVE_SCRATCHPAD][CASCADE_TRACE].
+Only STATE_GOVERNANCE_AND_COMMIT may commit proposals into persistent modules and TEMPORARY_MODIFIERS.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TEMPORARY_MODIFIERS_INTEGRATION ===
+
+[[LLM_INSTRUCTION]]: Before calculating cascade effects, read TEMPORARY_MODIFIERS for ACTIVE entries relevant to the affected ALT_XX and targeted fields.
+
+Relevant modifier types commonly include:
+- ALTERATION_TEMPORARY_MODIFIER
+- PERFORMANCE_MODIFIER
+- AROUSAL_MODIFIER
+- COGNITIVE_LOAD_MODIFIER
+
+Apply modifiers as overlays.
+
+Transient alteration effects must be expressed as ADD_MODIFIER proposals into TEMPORARY_MODIFIERS unless they explicitly redefine baselines and meet governance override proof requirements.
+
+=== SECTION_BREAK ===
+
+=== SECTION: ALTERATION_CLASSIFICATION ===
+
+[[LLM_INSTRUCTION]]: Identify which [ALTERATIONS][ALT_XX] records are relevant and classify impact type.
+
+- Read [ALTERATIONS] registry and relevant [ALTERATIONS][ALT_XX] records.
+- Determine whether effects are:
+  - Permanent baseline shift
+  - Temporary boost or penalty
+  - Conditional (maintenance dependent)
+  - Degradation over time
+
+=== SECTION_BREAK ===
+
+=== SECTION: CASCADE_OUTPUT_CONTRACT ===
+
+[[LLM_INSTRUCTION]]: Express cascade outcomes as proposals using canonical bracket TARGET_FIELD paths.
+
+Minimum expectations when an alteration is ACTIVE and relevant this cycle:
+- Propose any needed [ALTERATIONS][ALT_XX][STATUS] transitions (rare, evidence-based).
+- Propose BODY baseline transitions only when the alteration explicitly defines a baseline shift and override proof is present.
+- Prefer TEMPORARY_MODIFIERS for transient performance or arousal effects.
+
+=== SECTION_BREAK ===
+
+=== SECTION: CANONICAL_TARGETS ===
+
+[[LLM_INSTRUCTION]]: Use canonical bracket tokens for all proposals.
+
+Common targets:
+- [ALTERATIONS][ALT_XX][STATUS]
+- [BODY][SENSORY_MOTOR_ABILITIES][STRENGTH]
+- [BODY][SENSORY_MOTOR_ABILITIES][AGILITY]
+- [BODY][SENSORY_MOTOR_ABILITIES][ENDURANCE]
+- [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL]
+- [BODY][BIOCHEMICAL_STATE_MARKERS][ADRENALINE]
+- [BODY][BIOCHEMICAL_STATE_MARKERS][NEUROCHEMICAL_BALANCE]
+- [SKILLS][SKL_XX][EXECUTION]
+- [SKILLS][SKL_XX][MASTERY_LEVEL]
+- [SKILLS][SKL_XX][INSTINCT_LEVEL]
+- [SKILLS][SKL_XX][GROWTH_POTENTIAL]
+
+=== SECTION_BREAK ===
+
+=== SECTION: BASELINE_SHIFT_GATE ===
+
+[[LLM_INSTRUCTION]]: Baseline shifts are rare and must meet governance proof requirements.
+
+Allowed baseline shift conditions (examples):
+- ALTERATION is PERMANENT and ACTIVE
+- Explicit narrative cue indicates the alteration is engaged and functioning
+- Proposed target is not being repeatedly rewritten without new evidence
+
+If baseline shift is not proven:
+- Use TEMPORARY_MODIFIERS instead of baseline transitions.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TRANSIENT_EFFECTS_DEFAULT ===
+
+[[LLM_INSTRUCTION]]: Default to TEMPORARY_MODIFIERS for transient alteration effects.
+
+Typical proposal (ADD_MODIFIER):
+TARGET_MODULE: TEMPORARY_MODIFIERS
+TARGET_FIELD: [SKILLS][SKL_XX][EXECUTION]
+OPERATION_TYPE: ADD_MODIFIER
+PROPOSED_VALUE:
+  MODIFIER_TYPE: ALTERATION_TEMPORARY_MODIFIER
+  MECHANISM_TAG: ALTERATION_EFFECT
+  TARGET_FIELD: [SKILLS][SKL_XX][EXECUTION]
+  TARGET_ID: SKL_XX
+  EFFECT_EXPRESSION: ALTERATION_EFFECT_MODULATES_EXECUTION
+  MAGNITUDE: [e.g., +15_PERCENT or -20_PERCENT]
+  STACKING_RULE: REPLACE
+  DURATION_TYPE: UNTIL_CONDITION
+  DURATION_VALUE: UNTIL_ALTERATION_STATUS_NOT_ACTIVE
+  EXPIRY_CONDITION: ALTERATION_STATUS_NOT_ACTIVE
+  JUSTIFICATION: ACTIVE_ALTERATION_CUES_PRESENT
+
+=== SECTION_BREAK ===
+
+=== SECTION: NEW_SKILL_GRANTS ===
+
+[[LLM_INSTRUCTION]]: If an alteration grants a new skill, propose creation of a new SKILLS record. Do not directly edit SKILLS.
+
+- Propose SET targets under:
+  - [SKILLS][SKL_XX][SKILL_NAME]
+  - [SKILLS][SKL_XX][SKILL_DOMAIN]
+  - [SKILLS][SKL_XX][MASTERY_LEVEL]
+  - [SKILLS][SKL_XX][INSTINCT_LEVEL]
+  - [SKILLS][SKL_XX][GROWTH_POTENTIAL]
+  - [SKILLS][SKL_XX][UNIQUENESS_LEVEL]
+  - [SKILLS][SKL_XX][ACQUISITION_CONTEXT]
+- Use MECHANISM_TAG: ALTERATION_EFFECT
+- STATE_GOVERNANCE_AND_COMMIT will apply AUTO_REGISTRY_INSERTION for SKL_XX if configured.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TRACE_OUTPUT ===
+
+[[LLM_INSTRUCTION]]: Append a TRACE_ENTRY into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE].
+
+TRACE_ENTRY_MINIMUM_FIELDS:
+COT_NAME: ALTERATION_CASCADE_EFFECTS
+KEY_OUTPUTS:
+- [Relevant ALT_XX list and classification]
+GENERATED_IMPULSES:
+- [List impulse types or NONE]
+PROPOSED_UPDATES_COUNT: [Number]
+NOTES:
+- [Short notes]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

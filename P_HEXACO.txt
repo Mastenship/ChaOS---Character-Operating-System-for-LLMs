@@ -1,0 +1,33 @@
+=== SECTION: HEXACO ===
+
+[KEEP: Purpose & Role] This template defines the core, stable personality architecture of a character using the six-factor HEXACO model. It provides a baseline for psychological traits that influence behavior and interactions.
+
+[KEEP: Relationship to Other Modules]
+
+Informs: Brain-Body Link logic within the main Character System.
+Is Informed By: Background Layer (formative environment can influence trait expression).
+
+=== SECTION_BREAK ===
+
+=== SECTION: CORE_TRAIT_MARKERS ===
+
+Define each trait using the specified format: Trait Name: [percentile].
+Percentiles are qualitative (e.g., "80th percentile" = high).
+50th percentile represents the average human baseline.
+Do not add any additional interpretation or flavor text in this section.
+
+=== SECTION_BREAK ===
+
+=== SECTION: Trait Definitions ===
+
+[Trait Definitions]
+Honesty-Humility: Sincerity, fairness, greed avoidance, modesty.
+Emotionality: Fearfulness, anxiety, dependence, sentimentality.
+Extraversion: Social self-esteem, social boldness, sociability, liveliness.
+Agreeableness (vs. Anger): Forgiveness, gentleness, flexibility, patience.
+Conscientiousness: Organization, diligence, perfectionism, prudence.
+Openness to Experience: Aesthetic appreciation, inquisitiveness, creativity, unconventionality.
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

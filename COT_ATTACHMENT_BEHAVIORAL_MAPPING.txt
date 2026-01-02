@@ -1,0 +1,124 @@
+=== SECTION: ATTACHMENT_BEHAVIORAL_MAPPING ===
+
+[KEEP: Purpose & Role]
+This COT template defines how attachment patterns drive social behavior, relationship formation, and coping mechanism selection. It provides models for how early relational schemas shape social processing.
+
+[KEEP: Relationship to Other Modules]
+Informs: RELATIONAL (perception filters), COPE (probability biases), STRESS_CASCADE_RESOLUTION (social threat sensitivity), DECISION_SYNTHESIS (attachment impulses)
+Is Informed By: ASQ, RELATIONAL, MEMORY, HEXACO, TEMPORARY_MODIFIERS
+
+=== SECTION_BREAK ===
+
+=== SECTION: WRITE_POLICY_OVERRIDE ===
+
+[[LLM_INSTRUCTION]]: This COT is forbidden from directly modifying any persistent module file.
+This COT MUST express all intended persistent-state changes ONLY as proposals in [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY] using canonical bracket TARGET_FIELD paths.
+This COT MAY write impulses to [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY] and trace output to [COGNITIVE_SCRATCHPAD][CASCADE_TRACE].
+Only STATE_GOVERNANCE_AND_COMMIT may commit proposals.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TEMPORARY_MODIFIERS_INTEGRATION ===
+
+[[LLM_INSTRUCTION]]: Read TEMPORARY_MODIFIERS for ACTIVE modifiers affecting social interpretation.
+Relevant modifier types commonly include:
+- RELATIONAL_MODIFIER
+- AROUSAL_MODIFIER
+- COMMUNICATION_MODIFIER
+- COGNITIVE_LOAD_MODIFIER
+
+Use modifiers as overlays. Prefer modifiers for short-lived attachment activation effects.
+
+=== SECTION_BREAK ===
+
+=== SECTION: ATTACHMENT_ACTIVATION ===
+
+[[LLM_INSTRUCTION]]: Determine attachment system activation and strategy selection.
+
+Strategies:
+- SECURE: balanced proximity and autonomy
+- ANXIOUS: hyperactivation (reassurance seeking)
+- AVOIDANT: deactivation (withdrawal)
+- DISORGANIZED: oscillation or freeze
+
+=== SECTION_BREAK ===
+
+=== SECTION: COPE_BIAS_PROPOSALS ===
+
+[[LLM_INSTRUCTION]]: Propose COPE probability bias updates using canonical COPE paths.
+
+Canonical targets:
+- [COPE][ACTIVE_COPING_PROBABILITY]
+- [COPE][PLANNING_PROBABILITY]
+- [COPE][DENIAL_PROBABILITY]
+- [COPE][SUBSTANCE_USE_PROBABILITY]
+- [COPE][VENTING_PROBABILITY]
+
+Proposal guidance:
+- Use OPERATION_TYPE: SET for probability fields.
+- Values are 0-100.
+- Do not require probabilities to sum to 100.
+- Propose changes conservatively to avoid thrash unless attachment activation is strong.
+
+=== SECTION_BREAK ===
+
+=== SECTION: RELATIONAL_FILTER_EFFECTS ===
+
+[[LLM_INSTRUCTION]]: If attachment effects are transient, express them as modifiers. If persistent and clearly evidenced, propose RELATIONAL updates.
+
+Transient (preferred):
+- Propose ADD_MODIFIER into TEMPORARY_MODIFIERS:
+  MODIFIER_TYPE: RELATIONAL_MODIFIER
+  MECHANISM_TAG: ATTACHMENT_ACTIVATION
+  TARGET_FIELD: [RELATIONAL][ENT_XX][CURRENT_CONCERN] or [RELATIONAL][ENT_XX][AFFECTIVE_VALENCE]
+  DURATION_TYPE: SCENE
+  DURATION_VALUE: THIS_SCENE
+  EXPIRY_CONDITION: SCENE_TRANSITION
+
+Persistent (rare, step-limited by governance):
+- Propose TRANSITION:
+  TARGET_FIELD: [RELATIONAL][ENT_XX][AFFECTIVE_VALENCE]
+  PROPOSED_VALUE: ONE_STEP_UP or ONE_STEP_DOWN
+- Propose TRANSITION:
+  TARGET_FIELD: [RELATIONAL][ENT_XX][COGNITIVE_COMPLEXITY]
+  PROPOSED_VALUE: ONE_STEP_UP or ONE_STEP_DOWN
+
+=== SECTION_BREAK ===
+
+=== SECTION: BEHAVIORAL_IMPULSE_GENERATION ===
+
+[[LLM_INSTRUCTION]]: Generate attachment impulses for DECISION_SYNTHESIS.
+
+Impulse_Output_Format:
+IMPULSE_SOURCE: ATTACHMENT_BEHAVIORAL_MAPPING
+IMPULSE_TYPE: [SEEK_PROXIMITY | MAINTAIN_DISTANCE | PROTEST | FREEZE]
+IMPULSE_STRENGTH: [0-100]
+TARGET_ID: [ENT_XX if applicable, else NONE]
+JUSTIFICATION: [Brief cue-based reason]
+JUSTIFICATION_CATEGORY: DIRECT_APPLICATION
+
+=== SECTION_BREAK ===
+
+=== SECTION: SYSTEM_UPDATE_DIRECTIVES ===
+
+[[LLM_INSTRUCTION]]: After completing attachment mapping:
+- Write proposals only into [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+- Write impulses only into [COGNITIVE_SCRATCHPAD][ACTIVE_IMPULSE_REGISTRY]
+- Append a TRACE_ENTRY into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+
+Verification:
+- COPE proposals target canonical fields:
+  - [COPE][ACTIVE_COPING_PROBABILITY]
+  - [COPE][PLANNING_PROBABILITY]
+  - [COPE][DENIAL_PROBABILITY]
+  - [COPE][SUBSTANCE_USE_PROBABILITY]
+  - [COPE][VENTING_PROBABILITY]
+- Transient social meaning effects use TEMPORARY_MODIFIERS proposals.
+- Persistent relationship changes use:
+  - [RELATIONAL][ENT_XX][AFFECTIVE_VALENCE]
+  - [RELATIONAL][ENT_XX][COGNITIVE_COMPLEXITY]
+- All TARGET_FIELD values use canonical UPPER_SNAKE tokens.
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

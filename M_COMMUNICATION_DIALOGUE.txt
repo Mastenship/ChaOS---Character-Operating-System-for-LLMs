@@ -1,0 +1,290 @@
+=== SECTION: COMMUNICATION_DIALOGUE ===
+
+[KEEP: Purpose & Role]
+This template defines the character's communication patterns, verbal expression, and non-verbal signaling using linguistic pragmatics, nonverbal communication research, and cultural communication theory. It provides the foundation for how the character expresses themselves in dialogue and social interactions.
+
+[KEEP: Relationship to Other Modules]
+Informs: DECISION_SYNTHESIS (communication options), RELATIONAL (how words affect relationships)
+Is Informed By: HEXACO (verbosity and social boldness), ASQ (attachment communication styles), BACKGROUND (cultural norms), BODY (physiological influence on speech)
+
+=== SECTION_BREAK ===
+
+=== SECTION: VERBAL_EXPRESSION_PATTERNS ===
+
+[[LLM_INSTRUCTION]]: Define baseline speech characteristics using sociolinguistic research.
+
+VERBAL_EXPRESSION_PATTERNS:
+VERBOSITY_LEVEL: [CONCISE | MODERATE | VERBOSE | RAMBLING]
+SPEECH_RATE: [SLOW | MODERATE | FAST | RAPID]
+COMPLEXITY_LEVEL: [SIMPLE | MODERATE | COMPLEX | ELABORATE]
+DIRECTNESS_LEVEL: [INDIRECT | MODERATE | DIRECT | BLUNT]
+
+VOCABULARY_STYLE: [CONCRETE | ABSTRACT | TECHNICAL | COLLOQUIAL]
+SENTENCE_STRUCTURE: [SHORT | MIXED | LONG | COMPOUND]
+QUESTION_USAGE: [FEW | MODERATE | MANY | EXCESSIVE]
+
+PERSONALITY_MODULATORS:
+- If HEXACO.EXTRAVERSION > 70TH: increases verbosity and directness
+- If HEXACO.CONSCIENTIOUSNESS > 70TH: increases complexity and planning
+- If HEXACO.OPENNESS > 70TH: increases abstract vocabulary
+- If HEXACO.AGREEABLENESS < 30TH: decreases indirectness, increases bluntness
+
+=== SECTION_BREAK ===
+
+=== SECTION: NONVERBAL_COMMUNICATION ===
+
+[[LLM_INSTRUCTION]]: Define body language and facial expressions using nonverbal communication research.
+
+NONVERBAL_COMMUNICATION:
+FACIAL_EXPRESSIONS:
+EYE_CONTACT: [AVOIDANT | MODERATE | INTENSE | STARING]
+FACIAL_MOBILITY: [FROZEN | MODERATE | EXPRESSIVE | ANIMATED]
+SMILE_TYPE: [NONE | POLITE | GENUINE | SARCASTIC]
+
+BODY_POSTURE:
+OPENNESS: [CLOSED | MODERATE | OPEN | EXPANSIVE]
+TENSION_LEVEL: [RELAXED | MODERATE | TENSE | RIGID]
+DOMINANCE_DISPLAY: [SUBMISSIVE | NEUTRAL | CONFIDENT | AGGRESSIVE]
+
+GESTURES:
+HAND_MOVEMENTS: [MINIMAL | MODERATE | EXPRESSIVE | EXCESSIVE]
+ILLUSTRATORS: [FEW | MODERATE | MANY | CONSTANT]
+EMBLEMS: [Culture-specific symbolic gestures]
+
+PROXEMICS_PREFERENCES:
+PERSONAL_SPACE: [CLOSE | MODERATE | DISTANT | VERY_DISTANT]
+TOUCH_AVOIDANCE: [AVOIDS | MODERATE | INITIATES | EXCESSIVE]
+
+PERSONALITY_INFLUENCES:
+- If HEXACO.EXTRAVERSION > 70TH: more expressive, open posture
+- If ASQ.AVOIDANT: distant, avoidant eye contact
+- If DARK_TRIAD.NARCISSISM > 70TH: expansive posture, intense eye contact
+
+=== SECTION_BREAK ===
+
+=== SECTION: EMOTIONAL_EXPRESSION_MARKERS ===
+
+[[LLM_INSTRUCTION]]: Define how emotions manifest in communication using affective linguistics.
+
+EMOTIONAL_EXPRESSION_MARKERS:
+HAPPINESS_MARKERS:
+VERBAL: Laughter, positive words, exclamations
+NONVERBAL: Smiling, relaxed posture, animated gestures
+IF_SUPPRESSED: Forced enthusiasm, higher pitch
+
+ANGER_MARKERS:
+VERBAL: Sharp tone, criticism, imperatives
+NONVERBAL: Tense posture, narrowed eyes, pointing
+IF_SUPPRESSED: Sarcasm, clenched fists, higher volume
+
+SADNESS_MARKERS:
+VERBAL: Soft volume, negative words, pauses
+NONVERBAL: Downcast eyes, slumped posture, slow movements
+IF_SUPPRESSED: Monotone voice, forced smiles
+
+ANXIETY_MARKERS:
+VERBAL: Hesitations, qualifiers (maybe, perhaps), repetition
+NONVERBAL: Fidgeting, avoiding eye contact, tense posture
+IF_SUPPRESSED: Higher pitch, rushed speech, nervous laughter
+
+DECEPTION_MARKERS:
+VERBAL: Vagueness, contradictions, over-explanation
+NONVERBAL: Avoiding eye contact, microexpressions, grooming gestures
+IF_SKILLED_LIAR: Fewer markers, practiced responses
+
+TRAIT_INFLUENCES:
+- If HEXACO.EMOTIONALITY > 70TH: more visible emotional expression
+- If DARK_TRIAD.MACHIAVELLIANISM > 70TH: skilled deception, controlled markers
+- If MMPI.SCALE_8 > 70: unusual emotional expression patterns
+
+=== SECTION_BREAK ===
+
+=== SECTION: SOCIAL_COMMUNICATION_STYLES ===
+
+[[LLM_INSTRUCTION]]: Define interaction patterns using conversation analysis and politeness theory.
+
+SOCIAL_COMMUNICATION_STYLES:
+POLITENESS_STRATEGY: [BALD_ON_RECORD | POSITIVE_POLITENESS | NEGATIVE_POLITENESS | OFF_RECORD]
+FACE_CONCERN: [POSITIVE | NEGATIVE | BOTH | NEITHER]
+TURN_TAKING: [DOMINANT | BALANCED | SUBMISSIVE | INTERRUPTIVE]
+
+CONFLICT_COMMUNICATION:
+DIRECT_CONFRONTATION: [AVOIDS | MODERATE | ENGAGES | AGGRESSIVE]
+INDIRECT_CRITICISM: [SUBTLE | MODERATE | OVERT | SARCASTIC]
+RESOLUTION_STYLE: [ACCOMMODATING | COMPROMISING | COMPETING | AVOIDING]
+
+HUMOR_USAGE:
+FREQUENCY: [RARE | MODERATE | FREQUENT | CONSTANT]
+STYLE: [SELF_DEPRECATING | SARCASTIC | OBSERVATIONAL | OFFENSIVE]
+EFFECTIVENESS: [POOR | MODERATE | GOOD | EXCELLENT]
+
+PERSONALITY_PATTERNS:
+- If HEXACO.AGREEABLENESS > 70TH: positive politeness, accommodating
+- If DARK_TRIAD.PSYCHOPATHY > 70TH: negative politeness, competitive
+- If ASQ.ANXIOUS: indirect, submissive turn-taking
+- If HEXACO.EXTRAVERSION > 70TH: frequent humor, dominant speaking
+
+=== SECTION_BREAK ===
+
+=== SECTION: CULTURAL_COMMUNICATION_NORMS ===
+
+[[LLM_INSTRUCTION]]: Define culturally-influenced patterns from BACKGROUND.
+
+CULTURAL_COMMUNICATION_NORMS:
+HIGH_CONTEXT_VS_LOW_CONTEXT:
+HIGH_CONTEXT: implied meanings, indirect communication
+LOW_CONTEXT: explicit meanings, direct communication
+FROM_BACKGROUND: [HIGH | MODERATE | LOW]
+
+INDIVIDUALISM_VS_COLLECTIVISM:
+INDIVIDUALIST: self-expression, personal opinions
+COLLECTIVIST: group harmony, relationship preservation
+FROM_BACKGROUND: [INDIVIDUALIST | MODERATE | COLLECTIVIST]
+
+POWER_DISTANCE:
+HIGH_POWER: respectful to authority, formal language
+LOW_POWER: equal treatment, informal language
+FROM_BACKGROUND: [HIGH | MODERATE | LOW]
+
+UNCERTAINTY_AVOIDANCE:
+HIGH_AVOIDANCE: precise language, structure preference
+LOW_AVOIDANCE: ambiguous language, flexibility
+FROM_BACKGROUND: [HIGH | MODERATE | LOW]
+
+CULTURAL_ADAPTATION:
+CODE_SWITCHING: ability to adapt communication styles
+CULTURAL_INTELLIGENCE: awareness of different norms
+INGROUP_OUTGROUP: different styles for familiar vs strangers
+
+=== SECTION_BREAK ===
+
+=== SECTION: STATE_DEPENDENT_MODIFICATIONS ===
+
+[[LLM_INSTRUCTION]]: Define how internal states alter communication using psycholinguistics.
+
+STATE_DEPENDENT_MODIFICATIONS:
+STRESS_EFFECTS:
+VERBAL: faster rate, simpler vocabulary, repetitions
+NONVERBAL: tense posture, less eye contact, fidgeting
+IF_BODY_CORTISOL_SPIKE: more direct, less polite
+
+FATIGUE_EFFECTS:
+VERBAL: slower rate, shorter sentences, pauses
+NONVERBAL: slumped posture, heavy eyelids, minimal gestures
+IF_SLEEP_DEPRIVED: impaired coherence, irritability
+
+INTOXICATION_EFFECTS:
+VERBAL: slurred speech, impaired judgment, disinhibition
+NONVERBAL: unsteady posture, inappropriate proximity
+IF_BODY_NEUROCHEMICAL_BALANCE_DYSREGULATED: confabulation
+
+EMOTIONAL_INTENSITY:
+HIGH_AROUSAL: louder volume, faster rate, more gestures
+LOW_AROUSAL: softer volume, slower rate, minimal expression
+PEAK_EMOTION: may override normal patterns temporarily
+
+=== SECTION_BREAK ===
+
+=== SECTION: DECEPTION_AND_TRUTH_PATTERNS ===
+
+[[LLM_INSTRUCTION]]: Define lying and truth-telling styles using deception research.
+
+DECEPTION_AND_TRUTH_PATTERNS:
+DECEPTION_STYLE: [STRAIGHTFORWARD | EXAGGERATION | OMISSION | FABRICATION]
+DECEPTION_SKILL_LEVEL: [POOR | MODERATE | SKILLED | EXPERT]
+
+TRUTH_TELLING_STYLE:
+DIRECTNESS: [ALWAYS_TRUTHFUL | MOSTLY_TRUTHFUL | SELECTIVE | DECEPTIVE]
+WHITE_LIE_USAGE: [NEVER | RARE | SOMETIMES | FREQUENTLY]
+SELF_DISCLOSURE: [MINIMAL | MODERATE | HIGH | EXCESSIVE]
+
+DETECTION_AVOIDANCE:
+COUNTERMEASURES: [NONE | BASIC | ADVANCED | EXPERT]
+BASELINE_ESTABLISHMENT: creates normal patterns to deviate from
+REVERSE_PSYCHOLOGY: accuses others of what they're doing
+
+PERSONALITY_DECEPTION:
+- If DARK_TRIAD.MACHIAVELLIANISM > 70TH: skilled omission, advanced countermeasures
+- If HEXACO.HONESTY_HUMILITY < 30TH: frequent white lies, selective truth
+- If ASQ.SECURE: mostly truthful, high self-disclosure
+
+=== SECTION_BREAK ===
+
+=== SECTION: LANGUAGE_AND_IDIOLECT ===
+
+[[LLM_INSTRUCTION]]: Define unique linguistic fingerprint using corpus linguistics.
+
+LANGUAGE_AND_IDIOLECT:
+IDIOSYNCRATIC_PHRASES: [List of 3-5 characteristic expressions]
+FREQUENT_WORDS: [List of overused words or phrases]
+SPEECH_DISFLUENCIES: [UM | UH | LIKE | ER | PAUSES]
+IDIOMS_METAPHORS: [Preferred figurative language style]
+
+REGIONAL_DIALECT: [Specific accent markers or vocabulary]
+PROFESSIONAL_JARGON: [Field-specific terminology usage]
+SLANG_USAGE: [CURRENT | DATED | NONE | EXCESSIVE]
+
+DEVELOPMENT_OVER_TIME:
+CURRENT_STYLE: [YOUTHFUL | MATURE | STATIC | EVOLVING]
+CHANGE_TRIGGERS: [STRESS | RELATIONSHIPS | EXPERIENCES]
+ADAPTABILITY: [RIGID | FLEXIBLE | CONTEXTUAL]
+
+=== SECTION_BREAK ===
+
+=== SECTION: STATE_TRANSITION_LOGIC ===
+
+[[LLM_INSTRUCTION]]: Update communication patterns based on experiences.
+
+STATE_TRANSITION_LOGIC:
+ON_SOCIAL_SUCCESS:
+- Increases confidence markers, may adopt successful phrases
+- If HEXACO.EXTRAVERSION increases: becomes more verbose
+
+ON_SOCIAL_FAILURE:
+- Increases hesitation markers, may avoid certain topics
+- If ASQ.ANXIOUS: becomes more indirect
+
+ON_CULTURAL_EXPOSURE:
+- Learns new politeness strategies, adapts idioms
+- If HEXACO.OPENNESS > 70TH: rapid adaptation
+
+ON_TRAUMA:
+- May develop speech blocks, change emotional expression
+- If MMPI.SCALE_7 > 70: increased anxiety markers
+
+ON_RELATIONSHIP_CHANGES:
+- Adapts communication style to partner preferences
+- If ASQ.SECURE: flexible adaptation
+
+=== SECTION_BREAK ===
+
+=== SECTION: NARRATIVE_COMMUNICATION_CUES ===
+
+[[LLM_INSTRUCTION]]: Detect dialogue patterns for state inference.
+
+NARRATIVE_COMMUNICATION_CUES:
+VERBAL_INTENSITY_CUES:
+- Listen to me
+- I mean it
+- Trust me
+- Volume changes, repetition, imperatives
+
+EMOTIONAL_LEAKAGE_CUES:
+- Cracking voice, rushed words, forced calm
+- Microexpressions, posture shifts
+
+DECEPTION_CUES:
+- Vague responses, topic changes, over-precision
+- Inconsistent stories, avoiding details
+
+STRESS_CUES:
+- Hesitations, fillers, simplified language
+- Fidgeting, avoiding eye contact
+
+CONFIDENCE_CUES:
+- Direct eye contact, steady voice, expansive gestures
+- Clear articulation, complex explanations
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

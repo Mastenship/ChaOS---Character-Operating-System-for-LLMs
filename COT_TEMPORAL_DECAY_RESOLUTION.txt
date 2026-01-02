@@ -1,0 +1,106 @@
+=== SECTION: TEMPORAL_DECAY_RESOLUTION ===
+
+[KEEP: Purpose & Role]
+This COT template applies decay to memory, skills, relationships, and physical attributes during significant passages of time. It simulates forgetting, skill atrophy, relational drift, and aging.
+
+[KEEP: Relationship to Other Modules]
+Informs: MEMORY, SKILLS, RELATIONAL, BODY, ALTERATIONS
+Is Informed By: TEMPORAL_FLOW_PROCESSING (time skip trigger), TEMPORAL_DYNAMICS, narrative time jump context
+
+[[LLM_INSTRUCTION]]: WRITE POLICY OVERRIDE
+This COT is forbidden from directly modifying any persistent module file.
+This COT MUST express all intended persistent-state changes ONLY as proposals in S_COGNITIVE_SCRATCHPAD.PROPOSED_UPDATES_REGISTRY using canonical bracket Target_Field paths.
+This COT MAY write trace output to CASCADE_TRACE.
+Only STATE_GOVERNANCE_AND_COMMIT may commit proposals.
+
+[[LLM_INSTRUCTION]]: TEMPORARY_MODIFIERS INTEGRATION
+This COT primarily generates permanent/long-horizon transitions. Temporary modifiers are usually not appropriate here except for “readjustment” periods immediately after a large jump.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TIME_SKIP_INPUT ===
+
+[[LLM_INSTRUCTION]]: Use the time jump context provided by TEMPORAL_FLOW_PROCESSING.
+
+Time_Passed: [Duration string]
+Narrative_Context: [Brief summary]
+
+=== SECTION_BREAK ===
+
+=== SECTION: MEMORY_DECAY ===
+
+[[LLM_INSTRUCTION]]: For each applicable [MEM_XX], propose salience/detail adjustments using canonical paths.
+
+Examples:
+- Target_Field: [MEMORY][MEM_XX][Memory_Metadata][Salience]
+  Operation_Type: Set or Transition (if you treat it ordinal)
+- Target_Field: [MEMORY][MEM_XX][Narrative_Content][Internal_Monologue_Excerpt]
+  Operation_Type: Set
+- Target_Field: [MEMORY][MEM_XX][Narrative_Content][Sensory_Imprint]
+  Operation_Type: Set
+
+=== SECTION_BREAK ===
+
+=== SECTION: SKILL_ATROPHY ===
+
+[[LLM_INSTRUCTION]]: For each relevant [SKL_XX], propose step-limited transitions per SKILLS.STATE_TRANSITION_LOGIC.
+
+Targets:
+- [SKILLS][SKL_XX][Mastery Level]
+- [SKILLS][SKL_XX][Instinct Level]
+- [SKILLS][SKL_XX][Growth Potential]
+Operation_Type: Transition
+Mechanism_Tag: SKILL_STATE_CHANGE
+
+=== SECTION_BREAK ===
+
+=== SECTION: RELATIONAL_DRIFT ===
+
+[[LLM_INSTRUCTION]]: For each relevant [ENT_XX], propose step-limited transitions.
+
+Targets:
+- [RELATIONAL][ENT_XX][Affective_Valence]
+  Operation_Type: Transition
+- [RELATIONAL][ENT_XX][Cognitive_Complexity]
+  Operation_Type: Transition
+- [RELATIONAL][ENT_XX][Current_Concern]
+  Operation_Type: Set
+
+=== SECTION_BREAK ===
+
+=== SECTION: PHYSICAL_AGING ===
+
+[[LLM_INSTRUCTION]]: If time jump is significant (>= 1 year), propose conservative BODY changes using canonical paths.
+
+Possible Targets:
+- [BODY][Appearance/Aging][Skin Elasticity]
+- [BODY][Appearance/Aging][Hair Density]
+- [BODY][Physiological Health][Blood Pressure]
+- [BODY][Physiological Health][Heart Rate]
+Operation_Type: Set
+Justification must reference time jump magnitude.
+
+=== SECTION_BREAK ===
+
+=== SECTION: ALTERATION_DURATION ===
+
+[[LLM_INSTRUCTION]]: For each temporary/conditional [ALT_XX], propose status changes using canonical paths.
+
+Targets:
+- [ALTERATIONS][ALT_XX][Status]
+  Operation_Type: Transition
+- If awareness of fading is important, propose a MEMORY candidate (do not directly create memory here).
+
+=== SECTION_BREAK ===
+
+=== SECTION: SYSTEM_UPDATE_DIRECTIVES ===
+
+[[LLM_INSTRUCTION]]: After completing temporal decay resolution, propose updates using canonical Target_Field paths.
+
+Verification:
+- All proposals use canonical [MEMORY][MEM_XX], [SKILLS][SKL_XX], [RELATIONAL][ENT_XX], [ALTERATIONS][ALT_XX], [BODY][...] paths.
+- Step limits are respected; do not jump multiple steps without explicit override proof.
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

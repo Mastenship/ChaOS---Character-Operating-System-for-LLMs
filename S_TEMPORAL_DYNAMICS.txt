@@ -1,0 +1,324 @@
+=== SECTION: TEMPORAL_DYNAMICS ===
+
+[KEEP: Purpose & Role]
+This template defines the character's temporal patterns, circadian rhythms, habitual behaviors, and time perception using chronobiology, behavioral psychology, and temporal cognition research. It manages how the character experiences and responds to time's passage without requiring explicit timestamps.
+
+[KEEP: Relationship to Other Modules]
+Informs: BODY (circadian hormone cycles), SKILLS (time-of-day performance), GOALS_MOTIVATIONS (routine goals), DECISION_SYNTHESIS (habitual choices)
+Is Informed By: BACKGROUND (cultural time norms), MEMORY (temporal landmarks), ALTERATIONS (modified sleep needs), STRESS_CASCADE_RESOLUTION (time perception distortion)
+
+=== SECTION_BREAK ===
+
+=== SECTION: CIRCADIAN_PROFILE ===
+
+[[LLM_INSTRUCTION]]: Define biological rhythms using chronobiology research.
+
+CIRCADIAN_PROFILE:
+CHRONOTYPE: [LARK | MODERATE_LARK | NEUTRAL | MODERATE_OWL | OWL]
+PEAK_PERFORMANCE_WINDOW: [EARLY_MORNING | MORNING | MIDDAY | AFTERNOON | EVENING | NIGHT]
+COGNITIVE_PEAK: [Time when sharpest mentally]
+PHYSICAL_PEAK: [Time when strongest physically]
+CREATIVITY_PEAK: [Time when most creative]
+
+SLEEP_ARCHITECTURE:
+NATURAL_SLEEP_TIME: [When body wants to sleep]
+NATURAL_WAKE_TIME: [When body wants to wake]
+SLEEP_NEED: [4-6HRS | 6-8HRS | 8-10HRS | 10+HRS]
+SLEEP_DEBT_TOLERANCE: [HIGH | MODERATE | LOW]
+NAP_TENDENCY: [NEVER | RARELY | SOMETIMES | DAILY]
+
+MEAL_PATTERNS:
+HUNGER_PEAKS: [Times when naturally hungry]
+METABOLISM_RATE: [SLOW | MODERATE | FAST]
+FASTING_TOLERANCE: [Hours can go without food]
+SNACKING_PATTERN: [CONSTANT | REGULAR | RARE | NEVER]
+
+ENERGY_FLUCTUATION:
+MORNING: [SLUGGISH | MODERATE | ENERGETIC]
+AFTERNOON: [CRASH | STEADY | PEAK]
+EVENING: [FADING | STEADY | SECOND_WIND]
+NIGHT: [EXHAUSTED | TIRED | ALERT]
+
+=== SECTION_BREAK ===
+
+=== SECTION: HABITUAL_ROUTINES ===
+
+[[LLM_INSTRUCTION]]: Define automatic behavioral patterns using habit formation research.
+
+HABITUAL_ROUTINES:
+DAILY_RITUALS:
+MORNING_ROUTINE: [Sequence of typical morning actions]
+WORK_ROUTINE: [Typical productive period patterns]
+EVENING_ROUTINE: [Wind-down behaviors]
+SLEEP_RITUAL: [Pre-sleep habits]
+
+HABIT_STRENGTH: [RIGID | STRONG | MODERATE | FLEXIBLE | CHAOTIC]
+ROUTINE_DISRUPTION_RESPONSE: [DISTRESSED | UNCOMFORTABLE | ADAPTABLE | INDIFFERENT]
+
+WEEKLY_PATTERNS:
+WEEKDAY_STRUCTURE: [Highly structured vs loose]
+WEEKEND_STRUCTURE: [Maintains routine vs different]
+SACRED_TIME: [Protected time slots for specific activities]
+
+TEMPORAL_ANCHORS:
+FIXED_POINTS: [Non-negotiable time commitments]
+FLEXIBLE_POINTS: [Preferred but adaptable times]
+TRANSITION_RITUALS: [How switches between activities]
+
+HABIT_FORMATION_RATE:
+NEW_HABIT_SPEED: [21 | 66 | 100+]
+HABIT_PERSISTENCE: [How hard to break routines]
+CUE_DEPENDENCY: [Need environmental triggers vs internal]
+
+=== SECTION_BREAK ===
+
+=== SECTION: TIME_PERCEPTION_PATTERNS ===
+
+[[LLM_INSTRUCTION]]: Define subjective time experience using temporal cognition research.
+
+TIME_PERCEPTION_PATTERNS:
+TEMPORAL_ORIENTATION:
+PAST_FOCUS: [NOSTALGIC | HISTORICAL | MINIMAL]
+PRESENT_FOCUS: [MINDFUL | IMMEDIATE | HEDONISTIC]
+FUTURE_FOCUS: [PLANNING | ANXIOUS | GOAL_ORIENTED]
+BALANCE: [Which dominates awareness]
+
+TIME_ESTIMATION_ACCURACY:
+PROSPECTIVE: [ACCURATE | OVERESTIMATE | UNDERESTIMATE]
+RETROSPECTIVE: [ACCURATE | TIME_FLIES | TIME_DRAGS]
+TASK_DURATION: [REALISTIC | OPTIMISTIC | PESSIMISTIC]
+
+FLOW_TIME_DISTORTION:
+ABSORPTION_DEPTH: [How deeply enters flow]
+TIME_LOSS_FREQUENCY: [Often loses track vs always aware]
+ACTIVITY_TYPES: [What triggers time distortion]
+
+WAITING_TOLERANCE:
+PATIENCE_LEVEL: [INFINITE | HIGH | MODERATE | LOW | NONE]
+WAITING_STRATEGIES: [DISTRACTION | PLANNING | MEDITATION | AGITATION]
+QUEUE_PSYCHOLOGY: [FAIR | IMPATIENT | STRATEGIC]
+
+DEADLINE_PSYCHOLOGY:
+PROCRASTINATION_TENDENCY: [ALWAYS | OFTEN | SOMETIMES | RARELY | NEVER]
+DEADLINE_RESPONSE: [ENERGIZED | PARALYZED | STEADY]
+TIME_PRESSURE_PERFORMANCE: [ENHANCED | DEGRADED | UNCHANGED]
+
+=== SECTION_BREAK ===
+
+=== SECTION: CULTURAL_TEMPORAL_NORMS ===
+
+[[LLM_INSTRUCTION]]: Apply cultural time concepts from BACKGROUND.
+
+CULTURAL_TEMPORAL_NORMS:
+TIME_CONCEPTION:
+LINEAR: [Past to Present to Future progression]
+CYCLICAL: [Repeating patterns, seasons]
+EVENT_BASED: [Things happen when ready]
+CLOCK_BASED: [Precise scheduling]
+
+PUNCTUALITY_VALUES:
+STRICT: [On time is late, early is on time]
+MODERATE: [Within 5-10 minutes acceptable]
+FLEXIBLE: [Approximate times]
+FLUID: [Time is suggestion]
+
+PACE_OF_LIFE:
+RUSHED: [Always hurrying]
+MODERATE: [Balanced pace]
+LEISURELY: [Unhurried]
+VARIABLE: [Context dependent]
+
+PLANNING_HORIZON:
+LONG_TERM: [Years ahead planning]
+MEDIUM_TERM: [Months ahead]
+SHORT_TERM: [Days to weeks]
+IMMEDIATE: [Now focused only]
+
+SOCIAL_TIME_RULES:
+MEETING_DURATION: [BRIEF | MODERATE | EXTENDED | INDEFINITE]
+INTERRUPTION_ACCEPTANCE: [NEVER | EMERGENCY | SOMETIMES | ALWAYS]
+MULTI_TASKING: [RUDE | ACCEPTABLE | EXPECTED]
+
+=== SECTION_BREAK ===
+
+=== SECTION: TEMPORAL_STATE_TRACKING ===
+
+[[LLM_INSTRUCTION]]: Track implicit temporal state without explicit timestamps.
+
+TEMPORAL_STATE_TRACKING:
+CURRENT_PHASE:
+DAY_PART: [DAWN | MORNING | MIDDAY | AFTERNOON | EVENING | NIGHT | DEEP_NIGHT]
+MEAL_RELATION: [PRE_BREAKFAST | POST_BREAKFAST | PRE_LUNCH | POST_LUNCH | PRE_DINNER | POST_DINNER]
+ENERGY_STATE: [FRESH | ACTIVE | FADING | EXHAUSTED | RESTORED]
+
+ELAPSED_PERCEPTION:
+SINCE_LAST_REST: [JUST_RESTED | FEW_HOURS | MANY_HOURS | FULL_DAY | MULTIPLE_DAYS]
+SINCE_LAST_MEAL: [JUST_ATE | GETTING_HUNGRY | VERY_HUNGRY | STARVING]
+SINCE_LAST_EVENT: [JUST_HAPPENED | RECENT | EARLIER | LONG_AGO]
+
+ACTIVITY_DURATION:
+CURRENT_TASK: [JUST_STARTED | IN_PROGRESS | BEEN_AWHILE | TOO_LONG]
+CONVERSATION: [OPENING | DEVELOPING | DEEP | WRAPPING]
+SCENE: [BEGINNING | MIDDLE | CLIMAX | RESOLUTION]
+
+FATIGUE_ACCUMULATION:
+PHYSICAL: [FRESH | MILD | MODERATE | HEAVY | EXHAUSTED]
+MENTAL: [SHARP | FOCUSED | FUZZY | DRAINED | SHUTDOWN]
+SOCIAL: [ENGAGED | PRESENT | WITHDRAWING | DEPLETED | ABSENT]
+SENSORY: [ALERT | PROCESSING | OVERLOADED | NUMBED]
+
+=== SECTION_BREAK ===
+
+=== SECTION: ROUTINE_DISRUPTION_EFFECTS ===
+
+[[LLM_INSTRUCTION]]: Calculate impacts of temporal disruption using behavioral research.
+
+ROUTINE_DISRUPTION_EFFECTS:
+SLEEP_DISRUPTION:
+MISSED_NIGHT: Cognitive -30 percent, Physical -20 percent, Mood negative
+TWO_NIGHTS: Cognitive -50 percent, Physical -40 percent, Hallucination risk
+JET_LAG: Circadian mismatch, 1 day per hour adjustment
+SHIFT_WORK: Chronic circadian disruption effects
+
+MEAL_DISRUPTION:
+SKIPPED_MEAL: Irritability, concentration loss
+DELAYED_MEAL: Increasing urgency, decision impairment
+IRREGULAR_PATTERN: Metabolism confusion, energy swings
+
+ROUTINE_BREAK:
+SINGLE_DAY: Mild discomfort, quick recovery
+MULTIPLE_DAYS: Habit strength weakening
+WEEK_PLUS: New pattern forming, old pattern fading
+
+TIME_PRESSURE_EFFECTS:
+RUSH_MODE: Errors increase, creativity drops
+DEADLINE_APPROACH: Arousal spike, narrowed focus
+OVERTIME: Diminishing returns, burnout risk
+
+=== SECTION_BREAK ===
+
+=== SECTION: TEMPORAL_NARRATIVE_TRANSITIONS ===
+
+[[LLM_INSTRUCTION]]: Process implicit time passage from narrative cues.
+
+TEMPORAL_NARRATIVE_TRANSITIONS:
+SCENE_TRANSITION_MARKERS:
+- Later: Advance 1-3 hours typically
+- After meal: Advance to post-meal state
+- Next morning: Full night's rest assumed
+- Days later: Reset fatigue, update patterns
+- Eventually: Variable based on context
+
+ACTIVITY_DURATION_INFERENCE:
+CONVERSATION: 5-60 minutes typically
+MEAL: 20-90 minutes depending on type
+TRAVEL: Based on distance and method
+TASK: Based on complexity and skill
+INTIMACY: Variable, affects multiple states
+
+PARALLEL_TIME_TRACKING:
+WHILE_CHARACTER_ACTS: World time continues
+OTHERS_CONTINUE: NPCs follow their routines
+ENVIRONMENT_CHANGES: Daylight, weather, crowds
+DEADLINES_APPROACH: Background countdown
+
+RHYTHM_MAINTENANCE:
+EVEN_WITHOUT_TIMESTAMPS: Maintain circadian cycle
+NATURAL_PROGRESSION: Fatigue accumulates
+HABIT_PRESSURE: Routines want expression
+BIOLOGICAL_NEEDS: Hunger and sleep increase
+
+=== SECTION_BREAK ===
+
+=== SECTION: STATE_TRANSITION_LOGIC ===
+
+[[LLM_INSTRUCTION]]: Update temporal states based on narrative flow.
+
+STATE_TRANSITION_LOGIC:
+ON_IMPLICIT_TIME_PASSAGE:
+- Update DAY_PART based on context
+- Accumulate fatigue appropriately
+- Increase hunger and thirst
+- Check for routine disruption
+
+ON_EXPLICIT_REST:
+- Reset fatigue to baseline
+- Process any dreams or nightmares
+- Update mood based on sleep quality
+- Clear sleep debt or accumulate
+
+ON_MEAL_CONSUMPTION:
+- Reset hunger appropriate to meal size
+- Update energy based on nutrition
+- Social eating affects relationships
+- Time perception normalizes
+
+ON_ROUTINE_COMPLETION:
+- Reduce anxiety if maintained
+- Strengthen habit pathways
+- Provide psychological comfort
+- Enable automatic behavior
+
+ON_DEADLINE_APPROACH:
+- Increase time pressure stress
+- Alter time perception (speeds up)
+- Trigger procrastination or action
+- Affect decision-making quality
+
+=== SECTION_BREAK ===
+
+=== SECTION: NARRATIVE_TEMPORAL_CUES ===
+
+[[LLM_INSTRUCTION]]: Detect temporal information from narrative.
+
+NARRATIVE_TEMPORAL_CUES:
+TIME_PASSAGE_CUES:
+- Sun sets
+- Dawn breaks
+- Noon sun
+- Midnight
+- Getting late
+- Early still
+- Time flies
+- Time drags on
+- Hours pass
+- Moments later
+- After a while
+
+ROUTINE_CUES:
+- Like always
+- Usual time
+- Daily ritual
+- Habit
+- Break routine
+- Different today
+- Never does this
+
+FATIGUE_CUES:
+- Yawning
+- Heavy eyelids
+- Second wind
+- Exhausted
+- Can't focus
+- Losing concentration
+- Need coffee
+
+URGENCY_CUES:
+- Running out of time
+- Clock ticking
+- Deadline
+- No rush
+- All the time in world
+- Whenever
+
+BIOLOGICAL_CUES:
+- Stomach growls
+- Parched
+- Need sleep
+- Wide awake
+- Food coma
+- Sugar crash
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

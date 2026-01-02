@@ -1,0 +1,61 @@
+=== SECTION: BACKGROUND ===
+
+[KEEP: Purpose & Role]
+To define the mechanical and sociological parameters of a character's formative environment. It provides the normative data from which a character's baseline traits, skills, and beliefs are derived. It contains no direct information about the character.
+
+[KEEP: Relationship to Other Modules]
+Informs: All other modules. It provides the initial seeding logic for HEXACO, MMPI, BODY, SKILLS, and RELATIONAL templates.
+Is Informed By: Nothing. It is the foundational world-state.
+
+=== SECTION_BREAK ===
+
+=== SECTION: GEOGRAPHIC_DEMOGRAPHICS ===
+
+GEOGRAPHY: [e.g., Coastal Megalopolis, Arid Frontier, Orbital Station, Subterranean Arcology]
+POPULATION_DENSITY: [e.g., Sparse, Moderate, High, Extreme]
+POPULATION_DIVERSITY: [e.g., Homogenous, Mixed, Cosmopolitan]
+DOMINANT_ARCHITECTURAL_STYLE: [e.g., Brutalist Concrete, Bioluminescent Organic, Prefab Modular]
+
+=== SECTION_BREAK ===
+
+=== SECTION: SOCIAL_CULTURAL_NORMS ===
+
+SOCIAL_STRUCTURE: [e.g., Egalitarian, Stratified, Clan-based, Corporate Caste]
+FAMILY_UNIT: [e.g., Nuclear, Extended, Communal, Disassociated]
+PRIMARY_SOCIAL_VALUES: [e.g., Community, Individualism, Tradition, Progress]
+ARTISTIC_AESTHETIC_NORMS: [e.g., Minimalist, Ornate, Functional, Digital]
+PREVALENT_OUT_OF_HOME_SOCIAL_HUBS: [e.g., Public Houses, Community Centers, Virtual Salons, Guild Halls]
+
+=== SECTION_BREAK ===
+
+=== SECTION: POLITICAL_ECONOMIC_FRAMEWORK ===
+
+GOVERNANCE_MODEL: [e.g., Democracy, Technocracy, Corporate Feudalism, Anarchy]
+ECONOMIC_SYSTEM: [e.g., Capitalism, Resource-Based, Command Economy, Gift Economy]
+PRIMARY_EMPLOYMENT_SECTORS: [e.g., Agriculture, Information, Manufacturing, Extraction]
+ECONOMIC_MOBILITY: [e.g., High, Low, Static]
+PRIMARY_ECONOMIC_CONCERNS: [e.g., Scarcity, Inequality, Automation, Trade Wars]
+
+=== SECTION_BREAK ===
+
+=== SECTION: EDUCATIONAL_TECHNOLOGICAL_LEVEL ===
+
+EDUCATION_ACCESS: [e.g., Universal, Limited, Elitist, Apprenticeship-based]
+EDUCATIONAL_FOCUS: [e.g., STEM, Liberal Arts, Vocational, Ideological]
+TECHNOLOGICAL_LEVEL: [e.g., Industrial, Information Age, Biopunk, Post-Singularity]
+TECHNOLOGY_INTEGRATION: [e.g., Ubiquitous, Professional, Rare, Outlawed]
+DATA_ACCESS_AND_PRIVACY: [e.g., Open Public Network, Corporate-Owned, State-Monitored, Data-Havens]
+
+=== SECTION_BREAK ===
+
+=== SECTION: PREVALENT_OUTLOOKS ===
+
+OUTLOOK_ON_AUTHORITY: [e.g., Respectful, Questioning, Cynical, Submissive]
+OUTLOOK_ON_OUTSIDERS_AND_STRANGERS: [e.g., Welcoming, Wary, Hostile, Indifferent]
+OUTLOOK_ON_FATE_VS_FREE_WILL: [e.g., Fatalistic, Self-Determinist, Theologically Determined]
+OUTLOOK_ON_LAW_AND_ORDER: [e.g., Foundation of Society, Necessary Evil, Tool of Oppression, Inconvenience]
+OUTLOOK_ON_THE_FUTURE: [e.g., Optimistic, Pessimistic, Apocalyptic, Cyclical]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]

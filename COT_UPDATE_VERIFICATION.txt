@@ -1,0 +1,124 @@
+=== SECTION: UPDATE_VERIFICATION ===
+
+[KEEP: Purpose & Role]
+This COT runs after STATE_GOVERNANCE_AND_COMMIT. It performs deterministic post-commit verification checks to ensure:
+- governance rules were followed
+- no malformed or orphaned updates exist
+- key invariants and caps are satisfied
+It does not create new baseline changes. It is a validator and tracer.
+
+[KEEP: Relationship to Other Modules]
+Informs: Debug trace quality, cycle integrity.
+Is Informed By: COGNITIVE_SCRATCHPAD, STATE_GOVERNANCE_AND_COMMIT outputs, persistent modules, TEMPORARY_MODIFIERS.
+
+=== SECTION_BREAK ===
+
+=== SECTION: WRITE_POLICY (TRACE_ONLY) ===
+
+[[LLM_INSTRUCTION]]: This COT is trace-only.
+
+Allowed writes:
+- Append TRACE_ENTRY only into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+
+Disallowed:
+- Any writes to [COGNITIVE_SCRATCHPAD][STATE_COMMIT_AUDIT]
+- Any writes to [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY]
+- Any writes to BODY, RELATIONAL, SKILLS, MEMORY, ALTERATIONS, GOALS_MOTIVATIONS, BELIEF_SYSTEMS, COMMUNICATION_DIALOGUE, DOMINANT_PREDICTIVE_FRAME
+- Any writes to TEMPORARY_MODIFIERS
+
+=== SECTION_BREAK ===
+
+=== SECTION: INPUTS_THIS_COT_READS ===
+
+Primary:
+- [COGNITIVE_SCRATCHPAD][STATE_COMMIT_AUDIT]
+- [COGNITIVE_SCRATCHPAD][CYCLE_METADATA]
+- [COGNITIVE_SCRATCHPAD][TEMPORARY_STATE_FLAGS]
+- [COGNITIVE_SCRATCHPAD][CASCADE_TRACE]
+- [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY] (for counting and cross-checks)
+
+Persistent modules for spot checks:
+- [BODY]
+- [SKILLS]
+- [RELATIONAL]
+- [MEMORY]
+- [ALTERATIONS]
+- [GOALS_MOTIVATIONS]
+- [DOMINANT_PREDICTIVE_FRAME]
+- [TEMPORARY_MODIFIERS][MODIFIER_REGISTRY]
+
+=== SECTION_BREAK ===
+
+=== SECTION: VERIFICATION_CHECKLIST ===
+
+[[LLM_INSTRUCTION]]: Perform these checks in order. Do not invent missing data. If a check cannot be performed due to missing sections, record that as a warning in TRACE_ENTRY.
+
+CHECK_01_AUDIT_COVERAGE:
+- Every PROPOSAL_ID present in [COGNITIVE_SCRATCHPAD][PROPOSED_UPDATES_REGISTRY] must appear exactly once across:
+  - [COGNITIVE_SCRATCHPAD][STATE_COMMIT_AUDIT][COMMITTED]
+  - [COGNITIVE_SCRATCHPAD][STATE_COMMIT_AUDIT][SUPPRESSED]
+  - [COGNITIVE_SCRATCHPAD][STATE_COMMIT_AUDIT][DOWNGRADED]
+
+CHECK_02_AUDIT_ENTRY_SCHEMA_SANITY:
+- Every audit entry must include:
+  - PROPOSAL_ID
+  - TARGET_FIELD
+  - FINAL_ACTION
+If missing, record violation AUDIT_ENTRY_MALFORMED.
+
+CHECK_03_BODY_ENDOCRINE_DOUBLE_COUNTING_SANITY:
+- If [COGNITIVE_SCRATCHPAD][STATE_COMMIT_AUDIT] shows more than one COMMITTED proposal targeting:
+  - [BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL]
+  OR
+  - [BODY][BIOCHEMICAL_STATE_MARKERS][ADRENALINE]
+  then record warning DOUBLE_COUNTING_RISK_REVIEW.
+
+CHECK_04_MEMORY_CREATION_LIMIT_SANITY:
+- Count COMMITTED audit entries whose TARGET_FIELD matches:
+  - [MEMORY][MEM_XX][MEMORY_ID]
+- If count > 2, record violation MEMORY_CREATION_LIMIT_EXCEEDED.
+
+CHECK_05_TEMPORARY_MODIFIERS_CAPS_SANITY:
+- From [TEMPORARY_MODIFIERS][MODIFIER_REGISTRY], ensure:
+  - no more than 5 ACTIVE modifiers share the same TARGET_FIELD
+  - no more than 2 ACTIVE modifiers have MECHANISM_TAG HPA_AXIS system-wide
+  - no more than 2 ACTIVE modifiers have MECHANISM_TAG SYMPATHETIC system-wide
+- If violated, record violation TEMPORARY_MODIFIER_CAP_VIOLATION.
+
+CHECK_06_REGISTRY_RECORD_INTEGRITY (BEST_EFFORT):
+- MEMORY:
+  - each ID in [MEMORY][MEMORY_REGISTRY][MEMORY_ID] should have a corresponding [MEMORY][MEM_XX] record block
+- RELATIONAL:
+  - each ID in [RELATIONAL][RELATIONAL_REGISTRY][ENTITY_ID] should have a corresponding [RELATIONAL][ENT_XX] record block
+- SKILLS:
+  - each ID in [SKILLS][SKILL_REGISTRY][SKILL_ID] should have a corresponding [SKILLS][SKL_XX] record block
+- ALTERATIONS:
+  - each ID in [ALTERATIONS][ALTERATION_REGISTRY][ALTERATION_ID] should have a corresponding [ALTERATIONS][ALT_XX] record block
+- GOALS_MOTIVATIONS:
+  - each ID in [GOALS_MOTIVATIONS][GOAL_REGISTRY][GOAL_ID] should have a corresponding [GOALS_MOTIVATIONS][GOAL_RECORDS][GOAL_XX] record block
+If mismatch is detected, record warning REGISTRY_RECORD_MISMATCH.
+
+=== SECTION_BREAK ===
+
+=== SECTION: TRACE_OUTPUT ===
+
+[[LLM_INSTRUCTION]]: Append a TRACE_ENTRY into [COGNITIVE_SCRATCHPAD][CASCADE_TRACE].
+
+TRACE_ENTRY_MINIMUM_FIELDS:
+COT_NAME: UPDATE_VERIFICATION
+KEY_OUTPUTS:
+- RESULT: [PASS | WARN | FAIL]
+- VIOLATIONS_COUNT: [number]
+- WARNINGS_COUNT: [number]
+GENERATED_IMPULSES:
+- [NONE]
+PROPOSED_UPDATES_COUNT: 0
+NOTES:
+- VIOLATIONS:
+  - [list or NONE]
+- WARNINGS:
+  - [list or NONE]
+
+=== SECTION_BREAK ===
+
+[KEY_TERM: Document Complete]
