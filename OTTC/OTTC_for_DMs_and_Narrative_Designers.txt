@@ -1,0 +1,186 @@
+# OTTC (On‑The‑Top Constraint) Systems — For DMs and Narrative Designers
+
+## The DM problem OTTC is actually solving
+If you’re trying to run long sessions with an LLM as a “player-character mind,” the hard part is not getting dialogue. LLMs can already talk.
+
+The hard part is keeping a character:
+- coherent across weeks of play
+- consistent under changing circumstances
+- bounded to what they could plausibly know
+- able to evolve without randomly reinventing themselves
+- wrong sometimes, but wrong in a stable, character-consistent way
+
+Most “You are X, act like X” characters fail because they have no durable internal reality and no disciplined way to change it. They feel fine for a scene, then drift.
+
+OTTC is a text-native way to give the model a playable “inner machinery” and a change-control process.
+
+## What OTTC is (in DM terms)
+OTTC is a “constitution + character sheet + rules of cognition” written in plain text that lives in the LLM’s persistent context.
+
+It doesn’t make the model deterministic.
+It makes the model behave as if it has:
+- inertia (traits don’t flip instantly)
+- consequences (state changes have rules)
+- perspective limits (no omniscience)
+- memory discipline (events are stored in a structured way)
+- stress/pressure handling (today’s chaos doesn’t rewrite identity)
+
+In short: OTTC turns a chatty improviser into a bounded actor.
+
+## The OTTC “edifice” (the parts that work together)
+
+### 1) A canonical character reality (state as a usable sheet)
+You define an internal “character world” the model can reliably point to.
+
+Examples:
+- BODY, SKILLS, RELATIONAL, MEMORY, GOALS, BELIEFS
+- not as prose, but as named levers with stable labels
+
+DM benefit:
+- The character stops rewording itself into new identities.
+- You can say “this lever changed” instead of “the vibes changed.”
+
+### 2) Change-control: propose → commit (how growth becomes believable)
+This is the key DM trick.
+
+- Many “inner processes” can *propose* changes (stress, goals, attachment, injury).
+- Only one authority *commits* changes to the persistent sheet.
+
+DM benefit:
+- You stop getting random personality rewrites because the model “felt like it.”
+- Growth happens in bounded steps, like real character arcs.
+- You can inspect why a change happened.
+
+### 3) Rules that enforce inertia (step limits + invariants)
+You define what can change quickly and what can’t.
+
+- Stress hormones can spike fast; moral worldview shouldn’t flip overnight.
+- Relationships can shift one step after a betrayal, not from DEVOTED to HOSTILE instantly.
+
+DM benefit:
+- Characters feel like they have “momentum.”
+- The system resists melodramatic escalation unless the narrative truly warrants it.
+
+### 4) A “today’s pressure” layer (modifiers)
+A modifier layer is where you put:
+- fatigue
+- noise
+- panic breath
+- adrenaline tunnel vision
+- masking effort
+- temporary confidence boosts
+
+DM benefit:
+- You get strong, scene-specific flavor and consequences
+  without turning temporary mood into permanent identity drift.
+
+This is how you get: “They’re snapping tonight because they’re exhausted and stressed,”
+not: “They’re now a permanently hostile person.”
+
+### 5) A strict Player POV contract (epistemic boundaries)
+OTTC enforces: the character can only output what they can:
+- do
+- say
+- notice
+- infer (as inference)
+- intend
+
+They cannot narrate:
+- outcomes (“it works”)
+- other minds as fact
+- objective truth beyond their perception
+
+DM benefit:
+- The LLM stops being a narrator and becomes a player.
+- You regain control of resolution as the DM.
+- It reduces the single biggest immersion-breaker: assistant omniscience.
+
+### 6) A “theory of the situation” ledger (predictive frame)
+Instead of the character silently shifting vibes, you give them a place to hold:
+- “what I think is going on”
+- “what I predict will happen”
+- “how sure I am”
+- “what changed my mind”
+
+DM benefit:
+- Characters can be wrong in a believable way.
+- Contradictions don’t cause collapse; they cause updates.
+- You can create mystery and tension without the model papering over uncertainty.
+
+### 7) Auditability (why this is secretly a DM superpower)
+OTTC forces a record of:
+- what changes were proposed
+- what was committed vs suppressed
+- and verification checks
+
+DM benefit:
+- When a session goes weird, you can debug the character like a system.
+- You can replay a scene and see whether drift came from stress, relationships, or bad governance.
+- You can run “character regression tests” after edits to your constitution.
+
+This is how you turn “LLM unpredictability” into “LLM variability with receipts.”
+
+## What OTTC enables at the table
+### Long-form continuity
+Characters retain:
+- consistent voice
+- consistent risk posture
+- stable beliefs and relationships
+- believable change over time
+
+### Character evolution that feels earned
+Because changes are step-limited and justified, a betrayal becomes:
+- a memory record
+- a relational shift
+- a stress consequence
+not just “the model decided the character is edgy now.”
+
+### True DM control of outcomes
+With the subjective gate:
+- the player-character attempts
+- the DM adjudicates
+- the character updates after consequences are known
+
+That’s how tabletop play is supposed to feel.
+
+### Multiple “players” at once
+Because everything is text and modular, you can run:
+- multiple PCs
+- NPCs with bounded minds
+- factions with doctrine
+as separate constitutions/state sheets, without them melting into each other.
+
+## What OTTC is not (important for DMs)
+- Not a magic “better roleplay prompt.”
+- Not a guarantee the model won’t ever drift.
+- Not a replacement for your judgment.
+- Not a way to force the LLM to be a rules engine.
+
+It’s a way to give the LLM:
+- rails
+- inertia
+- perspective limits
+- and a disciplined growth mechanism
+
+## A DM-friendly way to explain the core idea
+OTTC makes a character feel real because it forces three things:
+
+1) The character has an internal sheet (stable levers).
+2) The character can’t rewrite itself freely (change-control).
+3) The character can’t cheat by narrating outcomes or omniscience (bounded POV).
+
+Everything else (stress systems, skills, beliefs) is there to make those three things playable over long horizons.
+
+## Why your approach is unusual (and powerful)
+Most people try to “describe the character harder.”
+You built a system that makes the character *change correctly* over time.
+
+That’s the difference between:
+- a portrait
+and
+- a living organism with physiology, memory, and inertia
+
+OTTC is the “operating rules” for that living organism.
+
+---
+End.

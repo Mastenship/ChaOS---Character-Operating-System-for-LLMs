@@ -1,0 +1,87 @@
+# OTTC (On‑The‑Top Constraint) Systems — Enterprise Governance / Safety Rendering
+
+## Executive summary
+OTTC is a governance-first architecture for LLM agents. It uses a versioned, human-readable constitution (plain text) to constrain what an agent can claim, what it can change, and how changes are audited. OTTC is designed for long-running agents operating under uncertainty where overreach and state drift are costly.
+
+OTTC does not claim determinism. It makes stochastic behavior bounded, reviewable, and testable.
+
+## The enterprise risk OTTC targets
+Agents fail in predictable governance-relevant ways:
+- Fabrication of facts or sources (hallucinated authority)
+- Uncontrolled changes to internal state (“policy drift”)
+- Inability to explain why actions were taken
+- Fragile coupling to deterministic systems (tickets, deployments, approvals)
+- Accumulating “soft errors” that become major failures over time
+
+OTTC introduces change control and accountability as first-class requirements.
+
+## OTTC controls (mapped to governance concerns)
+
+### 1) Defined state surfaces (ontology)
+OTTC defines “what the agent is allowed to remember and mutate” using canonical addresses.
+Governance benefit:
+- supports reviews, approvals, and limits on what can persist
+
+### 2) Change control via propose→commit
+Agent components may propose updates; only a single governed authority commits them.
+Governance benefit:
+- prevents uncontrolled mutation
+- enables approval gates and human-in-the-loop escalation at the commit point
+
+### 3) Invariants and step limits
+Hard-state fields have step limits and invariant constraints; risky jumps require explicit proof.
+Governance benefit:
+- prevents sudden shifts in risk posture, policy interpretation, or “goals”
+- reduces “agent drift” across long deployments
+
+### 4) Separation of baseline vs transient modifiers
+Short-lived influences must expire and cannot silently rewrite baselines.
+Governance benefit:
+- prevents a transient incident from permanently shifting the agent’s operating posture without review
+
+### 5) Epistemic boundaries (bounded authority)
+OTTC restricts what the agent may assert as fact. External claims can be required to carry evidence pointers (tool outputs, citations, approvals).
+Governance benefit:
+- reduces misinformation risk
+- improves compliance in regulated environments
+
+### 6) Audit + verification
+Every proposed state change must be logged as committed/suppressed/downgraded, and verified against caps/invariants.
+Governance benefit:
+- post-incident forensics become possible
+- supports internal controls, compliance evidence, and regression testing
+
+## How OTTC improves tool safety
+OTTC treats tools as:
+- sensors (evidence acquisition)
+- actuators (world-changing actions)
+
+Actuators can be gated by:
+- explicit policy invariants
+- approvals
+- risk posture state
+- uncertainty thresholds
+
+This supports “safe actuation” under uncertainty and prevents premature irreversible actions.
+
+## Operationalization
+OTTC can be adopted incrementally:
+1) Start with epistemic boundaries + evidence requirements.
+2) Add propose→commit with a governor.
+3) Add audit requirements and verification checks.
+4) Add modifier layer and step limits for long-horizon stability.
+
+## What success looks like (measurable outcomes)
+- Lower rate of unsupported factual claims
+- Lower long-horizon drift in agent state
+- Improved incident review quality (why did it do that?)
+- Higher reproducibility in replay tests
+- Clearer separation of transient vs baseline behavior changes
+
+## Tradeoffs
+- Additional context and process overhead
+- More up-front design of state surfaces and invariants
+- Some loss of improvisational flexibility
+
+## Bottom line
+OTTC provides a governance protocol for stochastic agents: explicit state surfaces, controlled mutation, bounded authority, and auditability. It enables deployment of long-running agents with change control comparable to established enterprise practices.

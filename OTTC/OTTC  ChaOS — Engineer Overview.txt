@@ -1,0 +1,76 @@
+# OTTC / ChaOS — Engineer Overview (1 page)
+
+## What this is
+ChaOS is a text-native governance architecture for a stateful LLM “agent” (here, a player-character). It turns stochastic generation into governed state updates by enforcing:
+
+- stable state addressing (canonical bracket paths)
+- multi-writer proposals / single-writer commit
+- deterministic conflict resolution
+- transient modifier overlays (no baseline erosion)
+- auditability + verification
+
+This is not a claim of determinism. It is a claim of bounded mutation + receipts.
+
+## Core abstraction: state is an internal API
+All mutable state is addressable via canonical bracket paths, e.g.:
+
+- `[BODY][BIOCHEMICAL_STATE_MARKERS][CORTISOL]`
+- `[RELATIONAL][ENT_01][AFFECTIVE_VALENCE]`
+- `[SKILLS][SKL_03][MASTERY_LEVEL]`
+
+This avoids synonym drift and gives you stable targets for update rules, tests, and tooling.
+
+## Update model: propose → commit (single-writer reality)
+Multiple processes (COT modules) may propose state deltas, but none may commit directly.
+
+- COTs write only to a volatile buffer (`COGNITIVE_SCRATCHPAD`):
+  - impulses (for action selection)
+  - proposals (intended state deltas)
+- A single governed authority (`STATE_GOVERNANCE_AND_COMMIT`) reconciles proposals and commits once per cycle.
+
+Result: deliberation can be messy; committed state remains consistent.
+
+## Deterministic reconciliation
+Commit applies:
+- canonicalization / alias translation (bounded)
+- step limits for hard state (prevents thrash)
+- invariants (must-hold constraints)
+- deterministic conflict policy:
+  - precedence order (VETO > TRANSITION > SET > modifiers…)
+  - tie-breakers (strength, priority order, conservative change)
+
+## Modifier layer: transience without identity erosion
+Short-lived influences (fatigue, deadline pressure, noise, masking effort) are stored as time-bounded modifiers, not written into baseline modules.
+
+This prevents the common agent failure where “the moment rewrites the person.”
+
+## Auditability + verification
+Every proposal must be accounted for exactly once:
+- COMMITTED
+- SUPPRESSED
+- DOWNGRADED
+
+Then a separate verification pass runs post-commit and is trace-only:
+- checks audit coverage
+- checks caps (e.g., modifier stacking)
+- checks registry/record integrity
+- flags violations without silently “fixing” state
+
+This yields replayable artifacts you can test (deltas + violations), not just prose.
+
+## Why this matters (beyond roleplay)
+For tool-using agents, OTTC makes tool calls more trustable because tool use becomes downstream of:
+- bounded epistemics (what can be claimed)
+- explicit hypotheses (what is being tested)
+- governed state updates (what changes because of evidence)
+- verifiable receipts (why it changed)
+
+## What to evaluate on a new model (“coupling”)
+OTTC depends on how well a model couples to:
+- canonical token discipline
+- write-contract obedience (no direct state edits)
+- audit completeness (exactly once)
+- schema stability under pressure
+- epistemic boundary compliance
+
+Qualification can be done with a short prompt battery and measured via violation rates and drift.

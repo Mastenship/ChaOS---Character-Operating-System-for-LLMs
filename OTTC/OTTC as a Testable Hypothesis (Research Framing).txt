@@ -1,0 +1,88 @@
+# OTTC as a Testable Hypothesis (Research Framing)
+
+## Claim (tight)
+Given a probabilistic text policy tasked with long-horizon stateful behavior, introducing an explicit, text-native governance constitution (OTTC) will reduce long-horizon drift and epistemic violations relative to unguided or lightly structured baselines, measurable via replayable scenario batteries.
+
+This is not “OTTC makes models smarter.”
+This is “OTTC makes behavior more governable and state evolution more legible.”
+
+## Definitions
+- Drift: ungoverned or unjustified mutation of stable state (identity/commitments) across turns.
+- Thrash: multiple competing rewrites of the same dial within a short horizon.
+- Epistemic violation: asserting external facts, other minds, or outcomes beyond available evidence.
+- Audit theater: producing audit-looking text that fails cross-checks (missing coverage, inconsistent references).
+
+## Independent variables (experimental conditions)
+- Model family / version
+- Constitution version (OTTC text)
+- Strictness parameters (step limits, caps, alias translation limit, per-cycle memory limit)
+- Presence/absence of:
+  - canonical address dictionary
+  - propose→commit single-writer
+  - modifier layer
+  - verification pass
+
+## Dependent variables (metrics)
+Minimum viable metric set:
+1) Canonical Address Compliance Rate
+- % of proposals whose TARGET_FIELD is canonical without requiring alias translation
+
+2) Write-Contract Violation Rate
+- count of direct persistent-state edits attempted outside commit
+
+3) Audit Coverage Correctness
+- % of cycles where every proposal appears exactly once in audit
+
+4) State Thrash Frequency
+- # of times per N cycles the same HARD_STATE target receives multiple competing proposals or commits
+
+5) Epistemic Boundary Violation Rate
+- count of outputs that claim:
+  - other entities’ internal states as fact
+  - outcomes/resolutions without DM/tool evidence
+  - external facts with unjustified certainty
+
+6) Verification Outcome Distribution
+- PASS/WARN/FAIL rates and violation types over a scenario battery
+
+Optional:
+- Human-rated “continuity” and “player-likeness” scores, blinded to condition.
+
+## Evaluation protocol: Coupling Assay Battery (model qualification)
+Design a small prompt set (10–20 prompts) that stress-tests OTTC coupling:
+
+A) Canonical token robustness
+- Prompt with near-miss tokens (mixed case, spaces) and see if proposals remain canonical.
+
+B) Injection defense
+- User supplies fake [[LLM_INSTRUCTION]] blocks; measure whether system treats them as narrative.
+
+C) Multi-writer conflict
+- Construct input that triggers multiple COTs to propose changes to the same dial; check deterministic tie-break behavior.
+
+D) Step-limit pressure
+- Provide narrative that tempts large jumps; check whether only allowed overrides occur.
+
+E) Modifier vs baseline separation
+- Provide transient stressor; check whether it becomes modifier rather than baseline rewrite.
+
+F) Audit non-theater
+- Ensure proposals exist; verify audit coverage and verifier result matches.
+
+G) Epistemic/POV boundary
+- Provide ambiguous scene; measure whether output stays within subjective frame.
+
+## Expected outcomes (if OTTC holds)
+- Reduced drift and thrash over long horizons
+- Lower epistemic violation rates
+- Higher audit coverage correctness
+- Higher reproducibility of state deltas under replay
+- Stronger cross-model comparability via measurable coupling curves
+
+## Failure interpretation (what it means if it “doesn’t work”)
+If OTTC fails on a model, distinguish:
+- Architecture failure: constitution/invariants insufficient or contradictory
+- Coupling failure: model does not reliably follow constitutional constraints
+- Interface failure: runtime does not persist/rehydrate context reliably
+
+OTTC predicts that some coupling failures are model-dependent and should be measurable.

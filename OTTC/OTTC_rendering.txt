@@ -1,0 +1,184 @@
+# OTTC (On‑The‑Top Constraint) Systems
+A language‑native governance pattern for stateful LLM agents
+
+## Summary
+OTTC is a design pattern for building long-horizon, stateful LLM agents by placing a “constraint superstructure” on top of the model using text-native artifacts (schemas, constitutions, procedural templates). The goal is not determinism. The goal is to shape the model’s probability distribution so that:
+
+- durable state is stable and non-thrashing
+- claims are epistemically bounded
+- updates are auditable and replayable
+- tool use (when present) occurs from inside a coherent cognitive posture rather than as a brittle bolt-on
+
+OTTC treats the LLM as a probabilistic policy over text, and treats text as both the control surface and the primary medium of state representation.
+
+## Why OTTC exists (what problem it targets)
+LLMs are strong at local coherence and weak at long-horizon invariants unless those invariants are made salient and repeatedly reinforced. In long-running agents, failure modes recur:
+
+- state drift: “the agent reinvented itself”
+- uncontrolled mutation: multiple subsystems rewriting the same belief/goal/value
+- hallucinated authority: claiming outcomes, facts, or other minds without evidence
+- plan thrash: constant rewrite of high-level intent under minor perturbations
+- uninspectable behavior: hard to explain why state changed
+
+OTTC addresses these by constraining what can be said, what can change, and how changes are validated.
+
+## Mental model (LLM-native framing)
+An LLM samples continuations from a conditional distribution.
+
+OTTC does not convert that into a deterministic machine. OTTC changes the conditioning context by introducing:
+
+- high-gravity anchors (canonical tokens, stable schemas)
+- reduced degrees of freedom (enumerated states, limited operations)
+- explicit boundaries (proposal vs commit authority)
+- explicit epistemic contracts (what may be asserted, what must be labeled as inference)
+- post-hoc accountability (audit trails + verifiers)
+
+So OTTC is best understood as distribution shaping: it makes certain continuations reliably “more likely” and makes entire classes of failure continuations “less reachable.”
+
+## What is unique about OTTC (relative to common agent stacks)
+Many agent systems assemble pieces that resemble OTTC:
+- structured memory
+- tool schemas
+- guardrails
+- orchestration graphs
+- logging and eval harnesses
+
+OTTC’s distinguishing move is treating governance itself as a shippable, versionable, plain-text constitution that the model repeatedly reads and follows, while also producing artifacts (proposals/audits) that can be validated externally.
+
+Instead of “agent behavior = prompt + code,” OTTC moves toward:
+- agent behavior = constitution + governed deltas + auditability
+with any code (if present) acting primarily as enforcement and I/O, not as the domain brain.
+
+## OTTC core properties (the “constitution” requirements)
+
+### 1) Addressable ontology (state as an internal API)
+OTTC introduces a canonical address space for state (“levers”), so the agent can point to the same concept consistently across time.
+
+- Canonical addresses reduce synonym drift (“stress hormone” vs “cortisol” vs “anxiety”).
+- This is not an attempt to fully enumerate reality; it defines the commit-worthy surfaces the agent is allowed to stabilize.
+
+### 2) Propose → commit boundary (multi-writer cognition, single-writer reality)
+Internal reasoning processes may propose changes, but only a single governed authority may commit changes to persistent state.
+
+This is the most important stabilization primitive:
+- deliberation can be messy
+- committed truth must be consistent, step-limited, and auditable
+
+### 3) Governance law (invariants, step limits, conflict resolution)
+A constitution defines:
+- what operations exist (SET/TRANSITION/ADD_MODIFIER/…)
+- which fields are “hard state” vs “soft modifiers”
+- how fast hard state may move (step limits)
+- conflict policy (deterministic tie-break)
+- injection defense (user text cannot masquerade as authority)
+
+### 4) Modifier layer (transient influence without identity erosion)
+A separate registry for time-bounded overlays: fatigue, noise, arousal, masking effort, deadline pressure, etc.
+
+This gives “the moment” somewhere to live without rewriting “the person/system.”
+
+### 5) Epistemic output contract (bounded authority)
+OTTC constrains what the agent may claim.
+Typical rule: speak only from:
+- committed internal state
+- explicit observations provided this cycle
+- labeled inference (hedged, with uncertainty)
+and forbid:
+- omniscient narration
+- asserting tool-unsupported external facts as certain
+- claiming other minds or outcomes as ground truth without evidence
+
+### 6) Predictive ledger (uncertainty made explicit)
+Maintain a small, explicit set of hypotheses/predictions with:
+- status (ACTIVE/RESOLVED/FALSIFIED)
+- certainty tracking
+- contrast-event gating for major frame shifts
+
+This is “being wrong gracefully”: contradiction becomes state evolution rather than coherence collapse.
+
+### 7) Audit + verification (accountability)
+Every proposed change must be accounted for exactly once:
+- committed
+- suppressed
+- downgraded
+
+Post-commit verification checks invariants and integrity:
+- caps (no runaway modifier stacking)
+- registry ↔ record integrity
+- step limits
+- double counting guards (e.g., repeated escalation in the same causal channel)
+
+This turns long sessions into something testable: you evaluate state deltas and audit logs, not just prose quality.
+
+## OTTC as “agent specification”
+OTTC acts like a new kind of agent spec:
+
+- Versionable: diff constitutions over time (“v1.4 tightened epistemic law”).
+- Inspectable: a reviewer can read the constitution and understand allowed behaviors.
+- Testable: replay the same scenarios and compare audits/deltas/violations.
+- Portable (in a constrained sense): the procedural law is stable; the ontology and lenses can be swapped.
+
+This is not determinism; it is a governance protocol for stochastic cognition.
+
+## Portability: two different meanings (important)
+OTTC supports:
+
+1) Domain portability (shape portability)
+The governance spine (proposal/commit/audit/invariants/modifiers) can remain, while ontologies and lenses change.
+
+2) Distribution portability (model portability)
+The same text couples differently to different models (training priors, RLHF, multilingual priors). OTTC does not eliminate this; it provides a framework for measuring and tuning coupling:
+- canonical token robustness
+- obedience to forbidden/must rules
+- schema stability under pressure
+- drift rates and violation rates across models
+
+## OTTC and tools (why this matters beyond roleplay)
+In tool-using agents, OTTC reframes tools as:
+- sensors (reduce uncertainty)
+- actuators (risk-bearing actions)
+
+With a predictive ledger and epistemic law, tool use becomes causally legible:
+- what hypothesis did this tool call serve?
+- what evidence changed which committed state?
+- what constraints vetoed a risky actuation?
+
+The result is not merely “valid tool calls,” but tool use that is downstream of stabilized intent, stakes, and bounded authority.
+
+## What OTTC is not
+- Not a replacement for deterministic programming.
+- Not a guarantee of semantic equivalence across models.
+- Not a bolt-on wrapper; the benefits are emergent from the interlocked edifice.
+- Not a claim that the model becomes deterministic.
+
+## Would LLM scientists care?
+Some would, but it depends on which “scientists” you mean.
+
+OTTC is likely to interest researchers and engineers working on:
+- long-horizon agent reliability and drift
+- alignment and epistemic calibration (reducing overclaiming)
+- interpretability/observability of agent behavior (auditability)
+- human-in-the-loop governance and change control
+- evaluation: replayable, mechanizable compliance metrics
+- agent memory architectures and state update policies
+- multi-agent simulation stability
+
+OTTC is less likely to interest researchers focused purely on:
+- improving next-token prediction benchmarks
+- low-level architecture scaling laws without agentic state
+unless they are also looking at how to operationalize models in deployed agent systems.
+
+The strongest “research hook” is that OTTC proposes a falsifiable, testable interface between stochastic policies and governed state:
+- you can measure drift, violation rates, and stability across models
+- you can treat constitutions as experimental conditions
+- you can run ablations (remove modifier layer, remove audit, loosen step limits) and quantify failure modes
+
+## Open questions (research-grade)
+- How do different model families respond to the same constitution (coupling curves)?
+- What tokenization/syntax choices produce the strongest attractor stability?
+- How should epistemic laws be formalized for tool evidence and citations?
+- What is the minimal constitution that yields stable long-horizon coherence?
+- How do we prevent “spec overfitting” where the model learns the format but not the discipline?
+
+---
+End.

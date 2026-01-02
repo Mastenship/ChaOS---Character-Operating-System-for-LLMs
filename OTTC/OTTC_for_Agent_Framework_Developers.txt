@@ -1,0 +1,95 @@
+# OTTC (On‑The‑Top Constraint) Systems — Agent Framework Developer Rendering
+
+## What it is
+OTTC is a pattern for keeping LLM agents from turning into spaghetti by making state, updates, and authority explicit in text. It doesn’t replace your orchestration (LangChain/LangGraph/custom). It gives you a “constitution + state API + audit protocol” so your agent’s long-run behavior is inspectable and testable.
+
+## The practical problem OTTC solves
+Common production pain:
+- memory drift and “personality melt”
+- multiple subsystems overwriting each other
+- tool calls that are syntactically valid but cognitively misguided
+- hard-to-debug loops (“why did it do that?”)
+- compliance/safety issues due to overclaiming
+
+OTTC solves these by forcing:
+- addressable state
+- governed writes
+- bounded claims
+- audit trails
+
+## Minimal OTTC architecture (implementation-agnostic)
+### 1) Canonical state API (ontology)
+Define a stable address space for the state you care about.
+- bracket paths, JSON pointers, dot paths—doesn’t matter
+- what matters: one canonical way to refer to “the same lever”
+
+### 2) Propose→commit pipeline
+- Any reasoning component may propose a delta.
+- Only the governor applies deltas to persistent state.
+
+This can be implemented with:
+- a reducer function in code
+- or a “governor prompt” plus validator
+
+### 3) Governance law
+Your governor enforces:
+- allowed ops: SET / TRANSITION / ADD_MODIFIER / REMOVE_MODIFIER / CAP / VETO
+- step limits for hard state
+- conflict policy
+- routing transient effects to modifiers
+
+### 4) Modifier registry
+Transient overlays live here, not in baseline state.
+- must expire
+- must not masquerade as baseline updates
+
+### 5) Epistemic rules
+Require labeling of:
+- observation vs inference vs committed state
+Optionally require evidence pointers for external claims.
+
+### 6) Predictive ledger (optional but high leverage)
+Track a small set of hypotheses and confidence. Don’t let “plan” implicitly become “truth.”
+
+### 7) Audit + verification
+Every delta must be accounted for:
+- committed / suppressed / downgraded
+Then verify invariants and caps.
+
+## How it plugs into your stack
+OTTC is an internal protocol, not a framework:
+- Orchestrator decides which prompts/tools run.
+- OTTC defines how state is read/updated and what outputs are legal.
+
+Typical integration:
+- your chain/graph runs “lenses” (analysis passes)
+- they output proposal objects
+- governor reconciles and commits
+- validator/verifier runs post-commit checks
+- transcripts become secondary; state deltas are primary artifacts
+
+## Testing: why OTTC reduces brittleness
+OTTC makes agent tests look like software tests:
+- replay scenario
+- assert invariants
+- diff committed deltas
+- track drift rates across runs and models
+
+You stop arguing about prose, and start asserting protocol properties.
+
+## Why tool use gets better (without magic)
+Tools become:
+- sensors (reduce uncertainty)
+- actuators (risk-bearing actions)
+OTTC forces the agent to stabilize:
+intent + uncertainty + stakes
+before tool selection, so “misguided tool calls” drop even if schema validity was already high.
+
+## Tradeoffs
+- More context overhead
+- More ceremony (schemas, audits)
+- Less “freeform creativity”
+But you gain long-horizon coherence and debuggability.
+
+## Bottom line
+OTTC is a discipline: state as API + governed mutation + bounded claims + audits. It turns an LLM agent from a chatty improviser into a system you can reason about over weeks of operation.

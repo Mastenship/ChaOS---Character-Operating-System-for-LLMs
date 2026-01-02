@@ -1,0 +1,88 @@
+# OTTC (On‑The‑Top Constraint) Systems — Academic ML / LLM Research Rendering
+
+## Abstract
+We propose OTTC: a language-native constraint superstructure for long-horizon, stateful LLM agents. OTTC does not modify model weights and does not claim determinism. Instead, it conditions generation with a versioned “constitution” that defines (i) an addressable state ontology, (ii) governed state mutation via propose→commit, (iii) epistemic boundaries on claims, and (iv) audit+verification requirements. The result is a measurable reduction in state drift and overclaiming through distribution shaping: canonical tokens, enumerated state options, step-limited transitions, and post-hoc verifiers act as high-gravity attractors that constrain reachable continuations.
+
+## Motivation
+Long-running LLM agents exhibit recurring failure modes: semantic drift in memory, uncontrolled mutation across subsystems, hallucinated authority, and uninspectable decision-making. Standard prompt-only approaches under-specify update semantics; standard tool-agent stacks often log actions but lack a formally enforced change-control protocol for internal state.
+
+## OTTC: Core Construct
+OTTC is a bundle of text artifacts that jointly define agent operating constraints:
+
+1) Addressable ontology (canonical state addresses)
+- A canonical address space for commit-worthy “levers.”
+- Purpose: reduce synonym drift and stabilize referents across time.
+
+2) Propose→commit governance boundary
+- Multiple reasoning passes may propose deltas; only a single governor commits state updates.
+- Purpose: isolate stochastic deliberation from durable state.
+
+3) Update law (invariants, step limits, conflict policy)
+- Dial classification (hard state vs soft modifiers)
+- Step limits for hard state
+- Deterministic conflict resolution
+- Injection-defense boundary conditions
+
+4) Persistent modifier layer
+- Time-bounded overlays (arousal, fatigue, noise, pressure) with expiry semantics.
+- Purpose: preserve baseline identity while allowing context sensitivity.
+
+5) Epistemic output contract
+- Constraints on what can be asserted as fact vs labeled inference.
+- Purpose: reduce “assistant omniscience” and external-fact hallucination.
+
+6) Predictive ledger (hypothesis discipline)
+- Explicit hypotheses/predictions with certainty and falsification/resolution states.
+- Purpose: represent uncertainty structurally rather than via implicit tone.
+
+7) Audit + verification
+- Every proposal accounted for (committed/suppressed/downgraded).
+- Post-commit checks for caps, invariants, integrity.
+- Purpose: enable mechanized evaluation.
+
+## Research Contributions (as testable claims)
+1) Constitution-as-conditioning reduces drift
+Hypothesis: canonical addressing + update law yields lower long-horizon semantic drift vs baseline prompt-only agents, measurable by:
+- rewrite rate of stable fields
+- registry/record integrity violations
+- divergence in repeated scenario replays
+
+2) Epistemic contracts reduce overclaiming
+Hypothesis: bounded-claim rules reduce unsupported factual assertions; measure:
+- unsupported named-entity claims
+- confidence calibration metrics under tool/no-tool conditions
+
+3) Auditability enables mechanizable agent evaluation
+Hypothesis: OTTC yields more stable evaluation targets (deltas, audits) than freeform transcripts; measure:
+- inter-rater reliability on “behavior correctness”
+- automated invariant pass rates
+
+## Experimental Setup (suggested)
+- Treat constitution variants as experimental conditions.
+- Run multi-model evaluation (distribution portability): different model families and RLHF regimes.
+- Ablations:
+  - remove modifier layer
+  - remove step limits
+  - remove predictive ledger
+  - remove verification pass
+- Metrics:
+  - state drift rate
+  - thrash frequency (repeated conflicting updates)
+  - hallucinated authority rate
+  - audit completeness
+  - recovery after contradiction events
+
+## Relation to Prior Work (high-level)
+OTTC intersects with:
+- structured memory and event sourcing for agents
+- program-of-thought / procedural prompting
+- verification and policy enforcement layers
+But differs by treating governance, epistemics, and audit as a unified, shippable text constitution.
+
+## Limitations
+- Model-dependent coupling: same constitution induces different behavior across models.
+- Context budget overhead.
+- OTTC constrains reachable behaviors; may reduce creativity/flexibility.
+
+## Conclusion
+OTTC reframes long-horizon agent reliability as a constitutional conditioning problem with mechanized accountability. It offers a researchable interface between stochastic policies and governed state transitions, enabling reproducible evaluation via replayable deltas and audits.
