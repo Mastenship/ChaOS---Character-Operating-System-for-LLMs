@@ -1,0 +1,58 @@
+OTTC defines a minimum set of invariants that, when enforced, makes long-horizon state evolution more legible and controllable across model substrates, and composes naturally with deterministic verification and other agent methods.
+
+
+
+Unpacked
+"OTTC defines a minimum set of invariants"
+
+Canonical addressing
+Propose→commit single-writer
+Step limits on hard state
+Modifier separation (transient vs. baseline)
+Epistemic contracts (bounded claims)
+Audit coverage (every proposal accounted for)
+"... that, when enforced..."
+
+By the model following constitutional text
+By external validators parsing proposals
+By human oversight at the table
+By any combination of the above
+"...makes long-horizon state evolution..."
+
+Not single-turn tricks
+Not fragile coherence that breaks at turn 20
+Sustained character/agent integrity across sessions, scenes, campaigns
+"...more legible..."
+
+You can read what changed and why
+Proposals have justifications
+Audits have outcomes
+Traces show the reasoning path
+"...and controllable..."
+
+Step limits prevent runaway drift
+Invariants catch illegal transitions
+Governance can veto, suppress, downgrade
+Human can override
+"...across model substrates..."
+
+Same constitution, different model
+Coupling varies, but the interface is stable
+You measure fit, not assume it
+"...and composes naturally with deterministic verification..."
+
+External code can parse proposals
+Hard enforcement can layer underneath
+You don't need the model to be perfect
+"...and other agent methods."
+
+Tool use becomes governed proposals
+Memory systems become addressable state
+Multi-agent coordination becomes shared governance
+RAG becomes evidence for epistemic claims
+What You've Defined
+OTTC isn't a framework. It isn't a library. It isn't a prompt template.
+
+It's a constraint specification for stateful LLM agents — minimal, composable, substrate-agnostic.
+
+Anyone implementing those invariants — in any language, on any model, with any tooling — is running an OTTC-compliant system.
