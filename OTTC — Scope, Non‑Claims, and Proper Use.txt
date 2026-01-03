@@ -1,0 +1,77 @@
+# OTTC — Scope, Non‑Claims, and Proper Use
+
+## Scope (what OTTC is)
+OTTC (On‑The‑Top Constraint) is a language‑native governance pattern for stateful LLM agents.
+
+It is a coupling layer: a text-based protocol that conditions an LLM’s continuation space toward:
+- stable, addressable state
+- bounded and labeled epistemic claims
+- governed state mutation (propose → commit)
+- auditable and replayable updates
+- tool use (when present) that is downstream of coherent posture rather than ad‑hoc improvisation
+
+OTTC provides a transmission interface between stochastic cognition and durable system state. It is intended to *assist* higher‑order processes (planning, retrieval, tool use, policy enforcement, human review), not replace them.
+
+## Non‑Claims (what OTTC is NOT)
+OTTC does **not** claim any of the following:
+
+1) **Not a silver bullet**
+- OTTC is not a universal solution to alignment, safety, reliability, or correctness.
+- A well‑structured OTTC system can still fail, drift, or produce harmful outputs.
+
+2) **Not determinism**
+- OTTC does not make an LLM deterministic.
+- It does not guarantee repeatable behavior across runs, seeds, temperatures, or context perturbations.
+
+3) **Not truth**
+- OTTC does not guarantee factual accuracy.
+- OTTC does not prevent hallucinations; it aims to reduce unsupported claims and make violations detectable and auditable.
+
+4) **Not model‑independent equivalence**
+- Different models couple differently to the same constitution.
+- OTTC does not guarantee the same semantics, obedience, or stability across model families, versions, or fine-tunes.
+
+5) **Not a replacement for software**
+- OTTC does not replace deterministic programming, validators, access controls, or runtime enforcement.
+- For high‑stakes use, deterministic verification and external policy gates may still be required.
+
+6) **Not a substitute for oversight**
+- OTTC does not eliminate the need for human review, monitoring, evaluation, or incident response.
+- Audit artifacts can be performative unless verified.
+
+## What OTTC *does* promise (the honest value)
+OTTC’s practical promise is governance and legibility:
+
+- It shifts trust from “the model is reliable” to “the process constrains and audits state change.”
+- It makes long‑horizon agent behavior easier to test by focusing evaluation on state deltas, audits, and invariant checks rather than prose.
+- It provides a stable interface for combining LLM cognition with external systems (tools, policies, verifiers) without letting stochastic outputs silently mutate durable state.
+
+## Proper Use (how to deploy OTTC responsibly)
+Use OTTC when you need one or more of:
+- long-horizon stability (reduced drift and thrash)
+- explicit authority boundaries (propose vs commit)
+- bounded epistemics (observation vs inference vs committed state)
+- auditable state evolution (post-hoc accountability)
+- tool safety framed as sensor/actuator governance
+
+Do **not** treat OTTC as sufficient by itself when:
+- decisions are high-stakes, irreversible, or regulated
+- external factual correctness is critical
+- you cannot tolerate policy violations even occasionally
+
+In those cases, OTTC should be paired with:
+- deterministic validators (schema + invariants)
+- explicit tool permissioning and policy gates
+- monitoring and evaluation harnesses
+- human-in-the-loop review at commit or actuation boundaries
+
+## Coupling Reality (why qualification matters)
+OTTC “touches the probability space with language.” Therefore:
+- constitutions are interpreted differently across models
+- coupling strength varies by model priors and training regime
+- even natural language and culture can shift the effective basin geometry
+
+Treat OTTC as a tunable conditioning layer. Measure coupling, do not assume it.
+
+---
+End.
